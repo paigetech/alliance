@@ -37,7 +37,6 @@ app.controller('SignupController', ['$scope', '$http', '$window', function($scop
       console.log('Successful signup.');
       // if successfull, redirect to /
       $window.location.href = '/';
-      console.log("this is what we sent to mongoose" + JSON.stringify(user));
     })
     .error(function (data) {
       console.log('Error: ' + data);
