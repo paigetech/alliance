@@ -52,3 +52,8 @@ Boilerplate
 4. Run the server with "node server.js"
 5. Wait to see the following in you command line "App listening on port 8080"
 6. Open your browser and go [here](http://localhost:8080) to see it live
+
+##Git Workflow
+There are three main branches, develop, test, production
+You should have a copy of develop locally which you will use to fork your feature branches out of.
+Once you have finished a feature, first pull the develop branch down, then merge in your feature branch and create a pull request.
