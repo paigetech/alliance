@@ -6,7 +6,10 @@ module.exports = function(app, passport) {
 	// create thing
 	app.post('/api/things', function(req, res) {
 		Thing.create({
-			// TODO populate the obj
+                  title : req.body.title,
+                  author : req.body.author,
+                  body : req.body.body,
+                  hidden : req.body.hidden
 		}, function(err, thing) {
 			if (err) {
 				res.send(err);

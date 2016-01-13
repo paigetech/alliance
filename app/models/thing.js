@@ -1,8 +1,24 @@
 // thing mongoose model - needs to be populated or removed
 var mongoose = require('mongoose');
 
-var thingInsideThing = {
-};
-
-module.exports = mongoose.model('Thing', {
+var thingSchema = mongoose.Schema({
+  title: {
+    type: String,
+    default: "title"
+  },
+  author: {
+    type: String,
+    default: "author"
+  },
+  body: {
+    type: String,
+    default: "body"
+  },
+  date: { 
+    type: Date, 
+    default: Date.now 
+  },
+  hidden: Boolean,
 });
+
+module.exports = mongoose.model('Thing', thingSchema);
