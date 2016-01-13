@@ -2,14 +2,11 @@ app.controller('ThingController', ['$scope', '$http', '$window', 'User', functio
 
   //pull in the global user object
   $scope.user = User;
-
   // booleans to show/hide alerts
   $scope.submitted = false;
   $scope.showErrorAlert = false;
-
   // alert string
   $scope.errorAlert = '';
-
   // thing model for our view
   $scope.thing = {
     title : '',
@@ -17,7 +14,6 @@ app.controller('ThingController', ['$scope', '$http', '$window', 'User', functio
     body : '',
     hidden : false
   }
-
   // at login button click
   $scope.submit = function(thing) {
     $scope.submitted = true;
@@ -42,4 +38,15 @@ app.controller('ThingController', ['$scope', '$http', '$window', 'User', functio
       $scope.errorAlert = data[0];
     });
   };
+
+  $http.get("/api/things")
+  .success(function (data) {
+    $scope.things = data;
+    console.log("Thing: " + data);
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
+
+
 }]);

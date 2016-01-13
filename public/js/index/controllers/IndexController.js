@@ -28,5 +28,6 @@ app.controller('IndexController', ['$scope', '$http', 'User', '$window', functio
     User.email = undefined;
     // update local copy of the global obj
     $scope.user = User;
+    console.log(User);
   }
 }]);
