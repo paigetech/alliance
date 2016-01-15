@@ -51,6 +51,7 @@ module.exports = function(app, passport) {
 				res.send(err);
 			}
 			res.json(thing);
+                        console.log("Thing from routes: " + thing);
 		});
 	});
 

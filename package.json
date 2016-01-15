@@ -1,24 +1,25 @@
 {
-  "name"         : "Boilerplate",
-  "version"      : "0.0.0",
-  "description"  : "This is a basic boilerplate for a Single Page Application.",
-  "main"         : "server.js",
-  "author"       : "",
-  "dependencies" : {
-    "passport" : "latest",
-    "passport-local" : "latest",
-    "express"         : "latest",
-    "mongoose"        : "latest",
-    "morgan"          : "latest",
-    "body-parser"     : "latest",
-    "method-override" : "latest",
-    "connect-flash" : "latest",
-    "bcrypt-nodejs" : "latest",
+  "name": "Boilerplate",
+  "version": "0.0.0",
+  "description": "This is a basic boilerplate for a Single Page Application.",
+  "main": "server.js",
+  "author": "",
+  "dependencies": {
+    "angular-resource": "^1.4.8",
+    "bcrypt-nodejs": "latest",
+    "body-parser": "latest",
+    "connect-flash": "latest",
+    "cookie-parser": "latest",
+    "express": "latest",
     "express-session": "latest",
-    "cookie-parser": "latest"
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "passport": "latest",
+    "passport-local": "latest"
   },
   "engines": {
-    "npm" : "latest"
+    "npm": "latest"
   },
   "scripts": {
     "start": "node server.js"

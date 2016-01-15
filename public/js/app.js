@@ -1,5 +1,5 @@
 // angular routing
-var app = angular.module('alliance', ['ngRoute']);
+var app = angular.module('alliance', ['ngRoute', 'ngResource']);
 
 // User global object to check loggedin status anywhere in the app
 app.service('User', function () {
@@ -24,6 +24,10 @@ app.config(function ($routeProvider, $locationProvider) {
   .when('/things', {
     controller: 'ThingController',
     templateUrl: 'js/thing/views/things.html'
+  })
+  .when('/thing/:id', {
+    controller: 'ThingFindController',
+    templateUrl: 'js/thing/views/thing_id.html'
   })
   .otherwise({
     controller: 'HomeController',
