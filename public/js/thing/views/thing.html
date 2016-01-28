@@ -18,10 +18,10 @@
         <input type="text" class="form-control" name="Body" placeholder="Write about stuff?" ng-model="thing.body" required>
       </div>
       <span ng-show="showErrorAlert" class="alert">
-        <p>Here is an alert!</p>
+        <p>There is an error!</p>
       </span>
       <div>
-        <button ng-disabled="thingForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Sign Up</button>
+        <button ng-disabled="thingForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Save</button>
       </div>
     </form>
   </div>

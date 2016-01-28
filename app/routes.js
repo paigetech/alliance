@@ -5,11 +5,13 @@ module.exports = function(app, passport) {
 	// api ---------------------------------------------------------------------
 	// create thing
 	app.post('/api/things', function(req, res) {
+          console.log('req body: ' + JSON.stringify(req.body));
 		Thing.create({
                   title : req.body.title,
                   author : req.body.author,
                   body : req.body.body,
-                  hidden : req.body.hidden
+                  hidden : req.body.hidden,
+                  user : req.body.user
 		}, function(err, thing) {
 			if (err) {
 				res.send(err);
@@ -85,7 +87,7 @@ module.exports = function(app, passport) {
 	});
 
 	// delete a thing by id
-	app.delete('/api/things/:id', function(req, res) {
+	app.delete('/api/thing/:id', function(req, res) {
 		Thing.remove({
 			_id : req.params.id
 		},

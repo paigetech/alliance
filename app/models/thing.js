@@ -2,6 +2,9 @@
 var mongoose = require('mongoose');
 
 var thingSchema = mongoose.Schema({
+  user: {
+    type: String
+  },
   title: {
     type: String,
     default: "title"

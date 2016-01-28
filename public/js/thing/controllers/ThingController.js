@@ -10,25 +10,26 @@ app.controller('ThingController', ['$scope', '$http', '$window', 'User', functio
   // thing model for our view
   $scope.thing = {
     title : '',
-    author : $scope.user.email,
+    author : '',
     body : '',
-    hidden : false
+    hidden : false,
+    user: User.email,
   }
-  // at login button click
+  // at save button click
   $scope.submit = function(thing) {
     $scope.submitted = true;
 
-    // user obj we are sending to the server
+    // thing obj we are sending to the server
     var post = {
       title : thing.title,
       author : thing.author,
       body : thing.body,
-      hidden : thing.hidden
+      hidden : thing.hidden,
+      user: thing.user
     };
 
     $http.post("/api/things", post)
     .success(function (data, status) {
-      console.log('Successful Thing!' + JSON.stringify(post));
       // if successfull redirect to /
       $window.location.href = '/';
     })
