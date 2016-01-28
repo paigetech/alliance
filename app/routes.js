@@ -56,19 +56,31 @@ module.exports = function(app, passport) {
 	});
 
 	// update a thing by id
-	app.post('/api/things/:id', function(req, res) {
-		Thing.findById(req.body._id, function(err, thing) {
+	app.post('/api/thing/:id', function(req, res) {
+		Thing.findById(req.params.id, function(err, thing) {
 			if(err) {
 				res.send(err);
 			}
 			// TODO make changes to thing
-			// save
-			thing.save(function (err) {
-				if (err) {
-					res.send(err);
-				}
-				res.json(thing);
-			});
+                        console.log("thing " + JSON.stringify(req.body));
+
+                        if (thing) {
+                          //update thing properties with request
+                          thing.title = req.body.title;
+                          thing.author = req.body.author;
+                          thing.body = req.body.body;
+                          thing.date = req.body.date;
+                          thing.hidden = req.body.hidden;
+
+                          thing.save(function (err) {
+                                  if (err) {
+                                          res.send(err);
+                                  }
+                                  res.json(thing);
+                          });
+                        } else {
+                          console.log("no thing!");
+                        };
 		});
 	});
 

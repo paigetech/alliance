@@ -12,5 +12,29 @@ app.controller('ThingFindController', ['$scope', '$http', '$window', 'User', '$r
     console.log('Error: ' + err);
   });
 
+  $scope.submit = function(thing) {
+    $scope.submitted = true;
+
+    // user obj we are sending to the server
+    var post = {
+      title : thing.title,
+      author : thing.author,
+      body : thing.body,
+      hidden : thing.hidden
+    };
+
+    $http.post("/api/thing/" + $scope.thing._id , post)
+    .success(function (data, status) {
+      console.log('Successful Thing!' + JSON.stringify(post));
+      // if successfull redirect to /
+      $window.location.href = '/';
+    })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      $scope.showErrorAlert = true;
+      $scope.errorAlert = data[0];
+    });
+  };
+
 
 }]);
