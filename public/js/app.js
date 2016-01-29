@@ -17,6 +17,17 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'SignupController',
     templateUrl: 'js/users/views/signup.html'
   })
+  .when('/profile', {
+    controller: 'ProfileController',
+    templateUrl: 'js/users/views/profile.html',
+    resolve : {
+      mess: function($location, User) {
+        if(User.isLoggedIn !== true) {
+          $location.path('/login');
+        }
+      }
+    },
+  })
   .when('/thing', {
     controller: 'ThingController',
     templateUrl: 'js/thing/views/thing.html'
