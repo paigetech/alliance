@@ -32,11 +32,10 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	// get thing by parameter
-	app.get('/api/things/:parameter', function(req, res) {
+	// get thing by parameters
+	app.get('/api/things/:value', function(req, res) {
 		// use mongoose to get all the things using a paramater
-		// TODO Populate the search obj with the needed parameter
-		Thing.find({}, function(err, things) {
+		Thing.find({user: req.params.value}, function(err, things) {
 			// if err, send it
 			if (err) {
 				res.send(err);
