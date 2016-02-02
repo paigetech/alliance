@@ -19,14 +19,7 @@ app.config(function ($routeProvider, $locationProvider) {
   })
   .when('/profile', {
     controller: 'ProfileController',
-    templateUrl: 'js/users/views/profile.html',
-    resolve : {
-      mess: function($location, User) {
-        if(User.isLoggedIn !== true) {
-          $location.path('/login');
-        }
-      }
-    },
+    templateUrl: 'js/users/views/profile.html'
   })
   .when('/thing', {
     controller: 'ThingController',
@@ -48,4 +41,12 @@ app.config(function ($routeProvider, $locationProvider) {
   // use the HTML5 History API
   // this line is needed because the SPA urls would show # characters otherwise. It also needs line 6 in index.html
   $locationProvider.html5Mode(true);
+});
+
+app.run( function ($rootScope, $location, $route, User) {
+
+  $rootScope.$on('$routeChangeStart', function(event, next, current) {
+    console.log("User loggedin: " + User.isLoggedIn);
+    console.log("User status: " + JSON.stringify(User));
+  });
 });
