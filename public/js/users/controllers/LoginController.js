@@ -30,7 +30,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function($scope
 
     $http.post("/api/login", user)
     .success(function (data, status) {
-      console.log('Successful login.');
+      console.log('Successful login. user: ' + JSON.stringify(data));
       // if successfull redirect to /
       $window.location.href = '/';
     })

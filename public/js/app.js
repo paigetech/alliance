@@ -38,3 +38,23 @@ app.config(function ($routeProvider, $locationProvider) {
   // this line is needed because the SPA urls would show # characters otherwise. It also needs line 6 in index.html
   $locationProvider.html5Mode(true);
 });
+
+app.run(function ($rootScope, $location, User, $http) {
+  $rootScope.$on('$routeChangeStart', function(event, next, current){
+    // check if user is loggedin
+    $http.get("/loggedin")
+    .success(function (data) {
+      if (data.isLoggedIn) {
+        // if user is logged in update the global obj
+        User = data;
+        console.log("poop");
+      } else {
+        $location.path('/login');
+      }
+    })
+    .error(function (err) {
+      console.log('Error: ' + err);
+    });
+  });
+});
+
