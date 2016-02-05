@@ -46,6 +46,9 @@
                     <li>
                         <a href="/thing">Thing</a>
                     </li>
+                    <li>
+                        <a href="/character">Character</a>
+                    </li>
                 </ul><!-- right navbar login and signup and logout -->
                 <div class="nav navbar-nav navbar-right" style=
                 "margin-left: 2em">
@@ -53,7 +56,7 @@
                     "btn btn-primary" href="/login">Login</a> <a class=
                     "btn btn-default" href="/signup">Sign Up</a></p>
                     <p class="navbar-btn" ng-show="user.isLoggedIn">Welcome,
-                    {{user.email}}! <a class="btn btn-danger" ng-click=
+                      <a href="/profile">{{user.email}}</a>! <a class="btn btn-danger" ng-click=
                     "logout()">Logout</a></p>
                 </div>
             </div><!-- /.navbar-collapse -->
@@ -67,9 +70,11 @@
               This is a footer Yo!
             </div>
         </div>
-    </div><!-- Modules -->
-    <script src="js/app.js">
-    </script> <!-- Controllers -->
+    </div>
+    <!-- Modules -->
+    <script src="js/services.js"></script>
+    <script src="js/app.js"></script>
+    <!-- Controllers -->
      
     <script src="js/home/controllers/HomeController.js"></script> 
     <script src="js/users/controllers/LoginController.js"></script> 
@@ -78,6 +83,6 @@
     <script src="js/index/controllers/IndexController.js"></script>
     <script src="js/thing/controllers/ThingController.js"></script>
     <script src="js/thing/controllers/ThingFindController.js"></script>
-    <script src="js/services.js"></script>
+    <script src="js/character/controllers/CharacterController.js"></script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+     <h1>Character</h1>
+     <p>User: {{user}}</p>
+    </div>
+    <form name="characterForm" ng-submit="submit(character)">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" name="Name" placeholder="What is your Charater's Name?" ng-model="character.name" required>
+      </div>
+      <div class="form-group">
+        <label>Race</label>
+        <input type="text" class="form-control" name="Race" placeholder="What is your character's race?" ng-model="character.race" required>
+      </div>
+      <div class="form-group">
+        <label>Class</label>
+        <input type="text" class="form-control" name="Class" placeholder="What class?" ng-model="character.pcClass" required>
+      </div>
+      <span ng-show="showErrorAlert" class="alert">
+        <p>There is an error!</p>
+      </span>
+      <div>
+        <button ng-disabled="characterForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
