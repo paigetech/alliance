@@ -1,5 +1,15 @@
-<p>{{user}}</p>
-<br />
-<p>{{userThings}}</p>
-<br />
-<p>{{characters}}</p>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+      <h1>{{user.email}}</h1>
+    </div>
+    <p>{{user}}</p>
+    <div ng-repeat="(key, value) in characters">
+      <hr />
+      <h2><a href="/character/{{value._id}}">Character</a></h2>
+      <p>Name: {{value.name}}</p>
+      <p>Race: {{value.race}}</p>
+      <p>Class: {{value.pcClass}}</p>
+    </div>
+  </div>
+</div>

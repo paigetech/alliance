@@ -39,21 +39,23 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   };
 
   //if there is an id present, use the get
-  $http.get('/api/character/' + $routeParams.id)
-  .success(function (data) {
-    if(data === null) {
-      console.log("Data Null: " + data);
-      $scope.showErrorAlert = true;
-      $scope.errorAlert = "No Character for that ID";
+  if( $routeParams.id ) {
+    $http.get('/api/character/' + $routeParams.id)
+    .success(function (data) {
+      if(data === null) {
+        console.log("Data Null: " + data);
+        $scope.showErrorAlert = true;
+        $scope.errorAlert = "No Character for that ID";
 
-    } else {
-      $scope.character = data;
-    }
-    //console.log("character: " + data);
-  })
-  .error(function (err) {
-    console.log('Error: ' + err);
-  });
+      } else {
+        $scope.character = data;
+      }
+      //console.log("character: " + data);
+    })
+    .error(function (err) {
+      console.log('Error: ' + err);
+    });
+  };
 
   $scope.save = function(character) {
     $scope.saved = true;

@@ -190,8 +190,9 @@ module.exports = function(app, passport) {
     Character.findById(req.params.id, function(err, character) {
       if(err) {
         res.send(err);
-      }
+      } else {
       res.json(character);
+      }
     });
   });
 
