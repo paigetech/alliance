@@ -183,4 +183,53 @@ module.exports = function(app, passport) {
       res.json(characters);
     });
   });
+
+  // get character by id
+  app.get('/api/character/:id', function(req, res) {
+    // use mongoose to find the character by id requested
+    Character.findById(req.params.id, function(err, character) {
+      if(err) {
+        res.send(err);
+      }
+      res.json(character);
+    });
+  });
+
+  // update a character by id
+  app.post('/api/character/:id', function(req, res) {
+    Character.findById(req.params.id, function(err, character) {
+      if(err) {
+        res.send(err);
+      }
+
+        if (character) {
+          //update character properties with request
+          character.name = req.body.name;
+          character.pcClass = req.body.pcClass;
+          character.race = req.body.race;
+
+          Character.update({ _id: req.params.id }, character, function (err, affected) {
+                  if (err) {
+                          res.send(err);
+                  }
+                  res.json('affected rows %d', affected);
+          });
+        } else {
+          console.log("no character!");
+        };
+    });
+  });
+
+  // delete a character by id
+  app.delete('/api/character/:id', function(req, res) {
+    Character.remove({
+      _id : req.params.id
+    },
+    function(err, character) {
+      if (err) {
+        res.send(err);
+      }
+      res.send();
+    });
+  });
 };

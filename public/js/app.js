@@ -37,6 +37,10 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'CharacterController',
     templateUrl: 'js/character/views/character.html'
   })
+  .when('/character/:id', {
+    controller: 'CharacterController',
+    templateUrl: 'js/character/views/character_id.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'js/home/views/home.html'

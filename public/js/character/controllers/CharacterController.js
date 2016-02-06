@@ -1,4 +1,4 @@
-app.controller('CharacterController', ['$scope', '$http', '$window', 'User', function($scope, $http, $window, User) {
+app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$routeParams', function($scope, $http, $window, User, $routeParams) {
 
   //pull in the global user object
   $scope.user = User;
@@ -7,7 +7,7 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', fun
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
-  // thing model for our view
+  // character model for our view
   $scope.character = {
     name : '',
     pcClass : '',
@@ -18,7 +18,7 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', fun
   $scope.submit = function(character) {
     $scope.submitted = true;
 
-    // thing obj we are sending to the server
+    // character obj we are sending to the server
     var post = {
       name : character.name,
       pcClass : character.pcClass,
@@ -36,6 +36,50 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', fun
       $scope.showErrorAlert = true;
       $scope.errorAlert = data[0];
     });
+  };
+
+  //if there is an id present, use the get
+  $http.get('/api/character/' + $routeParams.id)
+  .success(function (data) {
+    if(data === null) {
+      console.log("Data Null: " + data);
+      $scope.showErrorAlert = true;
+      $scope.errorAlert = "No Character for that ID";
+
+    } else {
+      $scope.character = data;
+    }
+    //console.log("character: " + data);
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
+
+  $scope.save = function(character) {
+    $scope.saved = true;
+
+    // user obj we are sending to the server
+    var post = {
+      name : character.name,
+      pcClass : character.pcClass,
+      race : character.race
+      //we don't edit the user ever
+    };
+
+    $http.post("/api/character/" + $scope.character._id , post)
+    .success(function (data, status) {
+      console.log('Successful character!' + JSON.stringify(post));
+      // if successfull redirect to /
+      $window.location.href = '/';
+    })
+    .error(function (data) {
+      console.log('Error: ' + data);
+      $scope.showErrorAlert = true;
+      $scope.errorAlert = data[0];
+    });
+  };
+  $scope.delete = function(character) {
+    $http.delete("/api/character/" + $scope.character._id);
   };
 
 
