@@ -1,5 +1,7 @@
-app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$routeParams', function($scope, $http, $window, User, $routeParams) {
+app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$routeParams', 'Character', function($scope, $http, $window, User, $routeParams, Character) {
 
+  $scope.build = Character.build;
+  $scope.cost = Character.cost;
   //pull in the global user object
   $scope.user = User;
   // booleans to show/hide alerts
@@ -84,6 +86,23 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
     $http.delete("/api/character/" + $scope.character._id);
   };
 
+  $scope.$watch('build', function(newVal, oldVal) {
+    console.log("new build: " + JSON.stringify(newVal));
+    Character.spellsValid(newVal.earth);
+    Character.spellsValid(newVal.celestial);
+    Character.craftsValid(newVal.crafts);
+    Character.weaponSkillsValid(newVal.weaponSkills);
+    Character.weaponsValid(newVal.weapons);
+    Character.scholarSkillsValid(newVal.scholarSkills);
+    Character.racialsValid(newVal.racials);
+    $scope.cost = Character.totalCost(newVal);
+    if (hasOwnValue($scope.invalid , true)) {
+      $scope.formInvalid = true;
+    } else {
+      $scope.formInvalid = true;
+    }
+
+  }, true);
 
 
 }]);

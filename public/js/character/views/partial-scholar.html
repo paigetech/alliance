@@ -1,0 +1,53 @@
+<!-- scholar skills -->
+<h2>Spells</h2>
+<div class="formgroup">
+  <h3>Scholar Skills</h3>
+  <label>Read and Write</label>
+  <input type="checkbox" ng-model="build.scholarSkills.readWrite" id="scholarSkills.readWrite" ng-class="{'invalid': invalid[readWrite]}"/><br />
+  <label>First Aid</label>
+  <input type="checkbox" ng-model="build.scholarSkills.firstAid" id="scholarSkills.firstAid" ng-class="{'invalid': invalid[firstAid]}"/><br />
+  <label>Healing Arts</label>
+  <input type="checkbox" ng-model="build.scholarSkills.healingArts" id="scholarSkills.healingArts" ng-class="{'invalid': invalid[healingArts]}"/><br />
+  <p ng-hide="!invalid.healingArts" style="color:red;">Must Purchase Read and Write and First Aid</p>
+  <label>Read Magic</label>
+  <input type="checkbox" ng-model="build.scholarSkills.readMagic" id="scholarSkills.readMagic" ng-class="{'invalid': invalid[readMagic]}"/><br />
+  <p ng-hide="!invalid.readMagic" style="color:red;">Must Purchase Read and Write</p>
+</div>
+<div class="formgroup">
+  <table>
+    <tr>
+      <td>
+        <b>Earth</b><br/>
+        <label>Primary: </label><input type="checkbox" ng-model="build.scholarSkills.earthPrimary" id="scholarSkills.earthPrimary" ng-disabled="scholarSkills.celestialPrimary"/><br />
+        <p ng-show="scholarSkills.celestialPrimary">Celestial Selected as Primary</p>
+        <label>Level 1</label><input type="number" min="0" ng-model="build.earth[1]" id="earth.1" ng-class="{'invalid': invalid[1]}"/><br />
+        <label>Level 2</label><input type="number" min="0" ng-model="build.earth[2]" id="earth.2" ng-class="{'invalid': invalid[2]}"/><br />
+        <label>Level 3</label><input type="number" min="0" ng-model="build.earth[3]" id="earth.3" ng-class="{'invalid': invalid[3]}"/><br />
+        <label>Level 4</label><input type="number" min="0" ng-model="build.earth[4]" id="earth.4" ng-class="{'invalid': invalid[4]}"/><br />
+        <label>Level 5</label><input type="number" min="0" ng-model="build.earth[5]" id="earth.5" ng-class="{'invalid': invalid[5]}"/><br />
+        <label>Level 6</label><input type="number" min="0" ng-model="build.earth[6]" id="earth.6" ng-class="{'invalid': invalid[6]}"/><br />
+        <label>Level 7</label><input type="number" min="0" ng-model="build.earth[7]" id="earth.7" ng-class="{'invalid': invalid[7]}"/><br />
+        <label>Level 8</label><input type="number" min="0" ng-model="build.earth[8]" id="earth.8" ng-class="{'invalid': invalid[8]}"/><br />
+        <label>Level 9</label><input type="number" min="0" ng-model="build.earth[9]" id="earth.9" ng-class="{'invalid': invalid[9]}"/><br />
+        <label>Formal</label><input type="number" min="0" ng-model="build.earth[10]" id="earth.10" ng-class="{'invalid': invalid[10]}"/><br />
+      </td>
+      <td>   </td>
+      <td>
+        <b>Celestial</b><br />
+        <label>Primary: </label><input type="checkbox" ng-model="build.scholarSkills.celestialPrimary" id="scholarSkills.celestialPrimary" ng-disabled="scholarSkills.earthPrimary"/><br />
+        <p ng-show="scholarSkills.earthPrimary">Earth Selected as Primary</p>
+        <label>Level 1</label><input type="number" min="0" ng-model="build.celestial[1]" id="celestial.1" ng-class="{'invalid': invalid[1]}"/><br />
+        <label>Level 2</label><input type="number" min="0" ng-model="build.celestial[2]" id="celestial.2" ng-class="{'invalid': invalid[2]}"/><br />
+        <label>Level 3</label><input type="number" min="0" ng-model="build.celestial[3]" id="celestial.3" ng-class="{'invalid': invalid[3]}"/><br />
+        <label>Level 4</label><input type="number" min="0" ng-model="build.celestial[4]" id="celestial.4" ng-class="{'invalid': invalid[4]}"/><br />
+        <label>Level 5</label><input type="number" min="0" ng-model="build.celestial[5]" id="celestial.5" ng-class="{'invalid': invalid[5]}"/><br />
+        <label>Level 6</label><input type="number" min="0" ng-model="build.celestial[6]" id="celestial.6" ng-class="{'invalid': invalid[6]}"/><br />
+        <label>Level 7</label><input type="number" min="0" ng-model="build.celestial[7]" id="celestial.7" ng-class="{'invalid': invalid[7]}"/><br />
+        <label>Level 8</label><input type="number" min="0" ng-model="build.celestial[8]" id="celestial.8" ng-class="{'invalid': invalid[8]}"/><br />
+        <label>Level 9</label><input type="number" min="0" ng-model="build.celestial[9]" id="celestial.9" ng-class="{'invalid': invalid[9]}"/><br />
+        <label>Formal</label><input type="number" min="0" ng-model="build.celestial[10]" id="celestial.10" ng-class="{'invalid': invalid[10]}"/><br />
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- /scholar skills -->

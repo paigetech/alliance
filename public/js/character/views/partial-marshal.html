@@ -1,0 +1,42 @@
+<!-- marshal skills -->
+<div class="formgroup">
+  <h4>Fighter Skills</h4>
+  <label>Weapon Proficiency</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.weaponproficiency" id="weaponSkills.weaponproficiency" ng-class="{'invalid': invalid[weaponproficiency]}"/><br />
+  <label>Critical Attack</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.criticalattack" id="weaponSkills.criticalattack" ng-class="{'invalid': invalid[criticalattack]}"/><br />
+  <label>Eviscerate</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.eviscerate" id="weaponSkills.eviscerate" ng-class="{'invalid': invalid.eviscerate}"/><br />
+  <label>Parry</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.parry" id="weaponSkills.parry" ng-class="{'invalid': invalid.parry}"/><br />
+  <label>Slay</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.slay" id="weaponSkills.slay" ng-class="{'invalid': invalid.slay}"/><br />
+  
+  <h4>Rogue Skills</h4>
+  <label>Backstab</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.backstab" id="weaponSkills.backstab" ng-class="{'invalid': invalid.backstab}"/><br />
+  <label>Back Attack</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.backattack" id="weaponSkills.backattack" ng-class="{'invalid': invalid.backattack}"/><br />
+  <label>Assasinate</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.assasinate" id="weaponSkills.assasinate" ng-class="{'invalid': invalid.assasinate}"/><br />
+  <label>Dodge</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.dodge" id="weaponSkills.dodge" ng-class="{'invalid': invalid.dodge}"/><br />
+  <label>Evade</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.evade" id="weaponSkills.evade" ng-class="{'invalid': invalid.evade}"/><br />
+  <label>Terminate</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.terminate" id="weaponSkills.terminate" ng-class="{'invalid': invalid.terminate}"/><br />
+  <label>Waylay</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.waylay" id="weaponSkills.waylay" ng-class="{'invalid': invalid.waylay}"/><br />
+  
+  <h4>Shared Skills</h4>
+  <label>Disarm</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.disarm" id="weaponSkills.disarm" ng-class="{'invalid': invalid.disarm}"/><br />
+  <label>Stun Limb</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.stunlimb" id="weaponSkills.stunlimb" ng-class="{'invalid': invalid.stunlimb}"/><br />
+    <p ng-hide="!invalid.stunlimb" style="color:red;">You must purchase 3 Weapon Proficencies or 3 Backstabs per Stun Limb</p>
+  <label>Riposte</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.riposte" id="weaponSkills.riposte" ng-class="{'invalid': invalid.riposte}"/><br />
+  <label>Shatter</label>
+    <input type="number" min="0" ng-model="build.weaponSkills.shatter" id="weaponSkills.shatter" ng-class="{'invalid': invalid.shatter}"/><br />
+</div>
+<!-- marshal skills -->
