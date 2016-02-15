@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 var characterSchema = mongoose.Schema({
-  {"characterName": String,
+  "characterName": String,
     "weaponSkills":{
       "weaponproficiency": Number,
       "parry": Number,
@@ -101,7 +101,6 @@ var characterSchema = mongoose.Schema({
       },
     "races": String,
     "pcClass": String
-  }
 });
 
 module.exports = mongoose.model('Character', characterSchema);

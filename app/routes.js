@@ -160,10 +160,16 @@ module.exports = function(app, passport) {
   app.post('/api/character', function(req, res) {
           console.log('req body: ' + JSON.stringify(req.body));
     Character.create({
-                  name : req.body.name,
-                  pcClass : req.body.pcClass,
-                  race : req.body.race,
-                  user : req.body.user
+      characterName: req.body.characterName,
+      races: req.body.races,
+      pcClass: req.body.pcClass,
+      weaponSkills: req.body.weaponSkills,
+      earth: req.body.earth,
+      celestial: req.body.celestial,
+      weapons: req.body.weapons,
+      scholarSkills: req.body.scholarSkills,
+      crafts: req.body.crafts,
+      racials: req.body.racials
     }, function(err, character) {
       if (err) {
         res.send(err);
@@ -198,12 +204,12 @@ module.exports = function(app, passport) {
 
   // update a character by id
   app.post('/api/character/:id', function(req, res) {
-    Character.findById(req.params.id, function(err, character) {
+    Character.findById(req.params.id, function(err, build) {
       if(err) {
         res.send(err);
       }
 
-        if (character) {
+        if (build) {
           //update character properties with request
           character.name = req.body.name;
           character.pcClass = req.body.pcClass;

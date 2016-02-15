@@ -10,24 +10,13 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
-  // character model for our view
-  $scope.character = {
-    name : '',
-    pcClass : '',
-    race : '',
-    user: $scope.user.email,
-  }
   // at save button click
-  $scope.submit = function(character) {
+  $scope.submit = function(build) {
     $scope.submitted = true;
 
     // character obj we are sending to the server
-    var post = {
-      name : character.name,
-      pcClass : character.pcClass,
-      race : character.race,
-      user: $scope.user.email,
-    };
+    var post = build;
+    console.log("Post: " + post);
 
     $http.post("/api/character", post)
     .success(function (data, status) {
