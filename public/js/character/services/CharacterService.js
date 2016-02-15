@@ -1,8 +1,6 @@
 app.service('Character', function () {
   //example
-  this.doThing = function() {
-    console.log("Do the Thing!");
-  }
+    this.invalidMessage = "";
     this.build = {};
     this.build.characterName = "Panda";
     this.build.weaponSkills = {
@@ -116,7 +114,6 @@ app.service('Character', function () {
     this.change = 0;
 
     this.totalCost = function(build){
-      console.log("total cost!");
       cost = 0;
       pcClass = this.build.pcClass;
       //take the build object and pull ref out of the cost obj the multiply
@@ -125,7 +122,6 @@ app.service('Character', function () {
 
         if (build.hasOwnProperty(key)) {
           if (key === "earth" ) {
-            //console.log("found the earth");
 
             //use the spell cost section
             var obj = build[key]
@@ -143,7 +139,6 @@ app.service('Character', function () {
             }
 
           } else if ( key === "celestial") {
-            //console.log("found the celestial");
 
             //use the spell cost section
             var obj = build[key]
@@ -162,19 +157,14 @@ app.service('Character', function () {
           } else {
             //use the regular cost calc
             var obj = build[key]
-            ////console.log("key: " + key + " val: " + build[key]);
             for (var ref in obj) {
               //key is the skill, obj[key] is the amount
               //if skill is in the costs chart
-              //console.log(" val: " + obj[ref]);
-                //console.log("ref: " + ref);
                 amount = obj[ref];
                 skill = ref;
               if (costs[skill]) {
                 skillCost = costs[skill][pcClass];
-                //console.log("skill: " + skill + " Amount: " + amount + " skillCost: " + skillCost + " Class: " + pcClass);
                 cost += skillCost * amount;
-                //console.log("cost: " + cost);
               } else {
               //  //console.log("NOT in costs: " + skill);
                 //earthPrimary and cPrimary causing problems
@@ -184,10 +174,7 @@ app.service('Character', function () {
           }
         }
       }
-
       return cost;
-      console.log("cost: " + cost);
-
     }
     //need to adjust for null
     this.spellsValid = function(spells){
@@ -199,16 +186,19 @@ app.service('Character', function () {
         if (spells[key] > 0 && spells[key] < 10) {
           this.levelDif = (Number(spells[key-1]) - Number(spells[key]));
           if( this.levelDif > 2 ) {
-            this.invalid[key-1] = true;
+            this.invalid[(key - 1)] = true;
+            this.invalidMessage += "spell level dif > 2 ";
+          
           }
           //need a special check to reset level 1 once valid
           if( this.levelDif <= 2 ) {
-            this.invalid[key-1] = false;
+            this.invalid[(key - 1)] = false;
           }
           //things are below 4
           if( spells[key - 1] < 4){
             if(spells[key] >= spells[key -1]) {
-              this.invalid[key] = true;
+              this.invalid[String(key)] = true;
+              this.invalidMessage += "spell things are below 4 ";
             } else {
               this.invalid[key] = false;
             }
@@ -218,6 +208,7 @@ app.service('Character', function () {
           if( spells[key - 1] >= 4){
             if(spells[key] > spells[key -1]) {
               this.invalid[key] = true;
+              this.invalidMessage += "spell things are above 4 ";
             } else {
               this.invalid[key] = false;
             }
@@ -226,8 +217,8 @@ app.service('Character', function () {
         if (spells[key] === 10) {
         //formal check
           if (spells['9'] < 1 && spells[10] > 0) {
-            //console.log('no 9th');
             this.invalid[10] = true;
+            this.invalidMessage += "spell no 9th for formal ";
           }
         }
       }
@@ -238,56 +229,68 @@ app.service('Character', function () {
       //eviscerate
       if (skills.eviscerate >= 1 && skills.weaponproficiency/skills.eviscerate < 4) {
         this.invalid.eviscerate = true;
+        this.invalidMessage += "weapon skill not enough porffs for this eviscerate ";
       } else { this.invalid.eviscerate = false; }
       //slay
       if (skills.slay >= 1 && skills.weaponproficiency/skills.slay < 2) {
         this.invalid.slay = true;
+        this.invalidMessage += "weapon skill not enough profs for this slay ";
       } else { this.invalid.slay = false; }
       //parry
       if (skills.parry >= 1 && skills.weaponproficiency/skills.parry < 2) {
         this.invalid.parry = true;
+        this.invalidMessage += "weapon skill not enough profs for this parry";
       } else { this.invalid.parry = false; }
       
       //rogue skills
       //assasinate
       if (skills.assasinate >= 1 && skills.backstab/skills.assasinate < 2) {
         this.invalid.assasinate = true;
+        this.invalidMessage += "not enough backstabs for this assasinate ";
       } else { this.invalid.assasinate = false; }
       //dodge
       if (skills.dodge >= 1 && skills.backstab/skills.dodge < 2) {
         this.invalid.dodge = true;
+        this.invalidMessage += "not enough backstabs for this dodge ";
       } else { this.invalid.dodge = false; }
       //evade
       if (skills.evade >= 1 && skills.backstab/skills.evade < 1) {
         this.invalid.evade = true;
+        this.invalidMessage += "not enough backstabs for this evade ";
       } else { this.invalid.evade = false; }
       //terminate
       if (skills.terminate >= 1 && skills.backstab/skills.terminate < 4) {
         this.invalid.terminate = true;
+        this.invalidMessage += "not enough backstabs for this terminate ";
       } else { this.invalid.terminate = false; }
       
       //combine skills
       //disarm
       if (skills.disarm >= 1 && (skills.weaponproficiency + skills.backstab)/skills.disarm < 1) {
         this.invalid.disarm = true;
+        this.invalidMessage += "weapon skill not enough backstabs/profs for this disarm ";
       } else { this.invalid.disarm = false; }
       //shatter - does not work with scout loggic ATM
       if (skills.shatter >= 1 && ((skills.weaponproficiency/3)+(skills.backstab/3))/skills.shatter < 1) {
         this.invalid.shatter = true;
+        this.invalidMessage += "weapon skill not enough backstabs/profs for this shatter";
       } else { this.invalid.shatter = false; }
       //stunlimb - does not work with scout loggic ATM
       if (skills.stunlimb >= 1 && ((skills.weaponproficiency/3)+(skills.backstab/3))/skills.stunlimb < 1) {
         this.invalid.stunlimb = true;
+        this.invalidMessage += "weapon skill not enough backstabs/profs for this stunlimb";
       } else { this.invalid.stunlimb = false; }
       //riposte - does not work with scout loggic ATM
       if (skills.riposte >= 1 && ((skills.weaponproficiency/4)+(skills.backstab/4))/skills.riposte < 1) {
         this.invalid.riposte = true;
+        this.invalidMessage += "weapon skill not enough backstabs/profs for this riposte ";
       } else { this.invalid.riposte = false; }
     }
     
     this.weaponsValid = function(skills){
       if (skills.twoWeapons === true && skills.florentine === false){
         this.invalid.twoWeapons = true;
+        this.invalidMessage += "weapons not the right prereqs for two weapon ";
       } else {
         this.invalid.twoWeapons = false;
       }
@@ -324,11 +327,13 @@ app.service('Character', function () {
     this.scholarSkillsValid = function(skills){
       if (skills.readMagic === true && skills.readWrite === false){
         this.invalid.readMagic = true;
+        this.invalidMessage += "prereqs not the right prereqs for read magic ";
       } else {
         this.invalid.readMagic = false;
       }
       if (skills.healingArts === true && skills.readWrite === false){
         this.invalid.healingArts = true;
+        this.invalidMessage += "prereqs not the right prereqs for healing arts ";
       } else {
         this.invalid.healingArts = false;
       }
@@ -337,39 +342,43 @@ app.service('Character', function () {
     this.craftsValid = function(skills){
       if(skills.alchemy > 0 && skills.herbalLore === false){
         this.invalid.alchemy = true;
-        //console.log("invalid");
+        this.invalidMessage += "prereqs not the right prereqs for alchemy ";
       } else {
         this.invalid.alchemy = false;
       }
       if(skills.createTrap > 0 && skills.legerdermain === false){
         this.invalid.createTrap = true;
+        this.invalidMessage += "prereqs not the right prereqs for create trap ";
       } else {
         this.invalid.createTrap = false;
       }
       if(skills.herbalLore > 0 && this.build.scholarSkills.readWrite === false){
         this.invalid.herbalLore = true;
+        this.invalidMessage += "prereqs not the right prereqs for herbal lore ";
       } else {
         this.invalid.herbalLore = false;
       }
       if(skills.createPotion > 0 && this.earth[1] < 1){
         this.invalid.createPotion = true;
+        this.invalidMessage += "prereqs not the right prereqs for create Potion ";
       } else {
         this.invalid.createPotion = false;
       }
       if(skills.createScroll > 0 && this.celestial[1] < 1){
         this.invalid.createScroll = true;
+        this.invalidMessage += "prereqs not the right prereqs for create scroll ";
       } else {
         this.invalid.createScroll = false;
       }
     }
     
     this.racialsValid = function(skills){
-      //console.log("racial valid");
       if(skills.breakCommand > 0){
         if ( this.build.races === "biata" || this.build.races === "mysticWoodElf" || this.build.races === "stoneElf" || this.build.races === "wylderkin"){
           this.invalid.breakCommand = false;
         } else {
           this.invalid.breakCommand = true;
+          this.invalidMessage += "wrong race for break Command ";
         } 
       } else { this.invalid.breakCommand = false; }
       if(skills.claws > 0){
@@ -377,6 +386,7 @@ app.service('Character', function () {
           this.invalid.claws = false;
         } else {
           this.invalid.claws = true;
+          this.invalidMessage += "wrong race for break claws ";
         } 
       } else { this.invalid.claws = false; }
       if(skills.gypsyCurse > 0){
@@ -384,6 +394,7 @@ app.service('Character', function () {
           this.invalid.gypsyCurse = false;
         } else {
           this.invalid.gypsyCurse = true;
+          this.invalidMessage += "wrong race for break gypsy curse ";
         } 
       } else { this.invalid.gypsyCurse = false; }
       if(skills.racialAssasinate > 0){
@@ -391,6 +402,7 @@ app.service('Character', function () {
           this.invalid.racialAssasinate = false;
         } else {
           this.invalid.racialAssasinate = true;
+          this.invalidMessage += "wrong race for break racial assasinate ";
         } 
       } else { this.invalid.racialAssasinate = false; }
       if(skills.resistBinding > 0){
@@ -398,6 +410,7 @@ app.service('Character', function () {
           this.invalid.resistBinding = false;
         } else {
           this.invalid.resistBinding = true;
+          this.invalidMessage += "wrong race for break resist binding ";
         } 
       } else { this.invalid.resistBinding = false; }
       if(skills.resistCommand > 0){
@@ -405,6 +418,7 @@ app.service('Character', function () {
           this.invalid.resistCommand = false;
         } else {
           this.invalid.resistCommand = true;
+          this.invalidMessage += "wrong race for break resist command ";
         } 
       } else { this.invalid.resistCommand = false; }
       if(skills.resistElement > 0){
@@ -412,6 +426,7 @@ app.service('Character', function () {
           this.invalid.resistElement = false;
         } else {
           this.invalid.resistElement = true;
+          this.invalidMessage += "wrong race for break resist element ";
         } 
       } else { this.invalid.resistElement = false; }
       if(skills.resistFear > 0){
@@ -419,6 +434,7 @@ app.service('Character', function () {
           this.invalid.resistFear = false;
         } else {
           this.invalid.resistFear = true;
+          this.invalidMessage += "wrong race for break resist fear ";
         } 
       } else { this.invalid.resistFear = false; }
       if(skills.resistMagic > 0){
@@ -426,6 +442,7 @@ app.service('Character', function () {
           this.invalid.resistMagic = false;
         } else {
           this.invalid.resistMagic = true;
+          this.invalidMessage += "wrong race for break resist magic ";
         } 
       } else { this.invalid.resistMagic = false; }
       if(skills.resistNecromancy > 0){
@@ -433,6 +450,7 @@ app.service('Character', function () {
           this.invalid.resistNecromancy = false;
         } else {
           this.invalid.resistNecromancy = true;
+          this.invalidMessage += "wrong race for break resist Necromancy ";
         } 
       } else { this.invalid.resistNecromancy = false; }
       if(skills.resistPoison > 0){
@@ -440,14 +458,15 @@ app.service('Character', function () {
           this.invalid.resistPoison = false;
         } else {
           this.invalid.resistPoison = true;
+          this.invalidMessage += "wrong race for break resist poison ";
         } 
       } else { this.invalid.resistPoison = false; }
       if(skills.racialDodge === true){
-        //console.log("dodge");
         if ( this.build.races === "hobling" || this.build.races === "wylderkin"){
           this.invalid.racialDodge = false;
         } else {
           this.invalid.racialDodge = true;
+          this.invalidMessage += "wrong race for break racial dodge ";
         } 
       } else { this.invalid.racialDodge = false; }
       if(skills.racialSlay === true){
@@ -455,6 +474,7 @@ app.service('Character', function () {
           this.invalid.racialSlay = false;
         } else {
           this.invalid.racialSlay = true;
+          this.invalidMessage += "wrong race for break racial slay ";
         } 
       } else { this.invalid.racialSlay = false; }
       if(skills.racialProfficiency === true){
@@ -462,18 +482,17 @@ app.service('Character', function () {
           this.invalid.profficiency = false;
         } else {
           this.invalid.racialProfficiency = true;
+          this.invalidMessage += "wrong race for break racial prof ";
         } 
       } else { this.invalid.racialProfficiency = false; }
     }
-    hasOwnValue = function(obj, val) {
-      for(var prop in obj) {
-        if(obj.hasOwnProperty(prop) && this.build[prop] === val) {
-          return true;
-        }
-      }
-      return false;
+
+
+    this.invalidCheck = function() {
+      this.invalid.message = this.invalidMessage;
+      return this.invalid;
     };
-    
+
     
     costs = {
       alchemy: { 

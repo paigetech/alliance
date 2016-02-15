@@ -1,5 +1,6 @@
 app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$routeParams', 'Character', function($scope, $http, $window, User, $routeParams, Character) {
-
+  $scope.invalid = Character.invalid;
+  $scope.invalidMessage = Character.invalidMessage;
   $scope.build = Character.build;
   $scope.cost = Character.cost;
   //pull in the global user object
@@ -52,7 +53,6 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
       } else {
         $scope.character = data;
       }
-      //console.log("character: " + data);
     })
     .error(function (err) {
       console.log('Error: ' + err);
@@ -87,7 +87,6 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   };
 
   $scope.$watch('build', function(newVal, oldVal) {
-    console.log("new build: " + JSON.stringify(newVal));
     Character.spellsValid(newVal.earth);
     Character.spellsValid(newVal.celestial);
     Character.craftsValid(newVal.crafts);
@@ -96,13 +95,23 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
     Character.scholarSkillsValid(newVal.scholarSkills);
     Character.racialsValid(newVal.racials);
     $scope.cost = Character.totalCost(newVal);
+    $scope.invalid = Character.invalidCheck();
+
     if (hasOwnValue($scope.invalid , true)) {
       $scope.formInvalid = true;
     } else {
-      $scope.formInvalid = true;
+      $scope.formInvalid = false;
     }
 
   }, true);
 
+  hasOwnValue = function(obj, val) {
+    for(var prop in obj) {
+      if(obj.hasOwnProperty(prop) && obj[prop] === val) {
+        return true;
+      }
+    }
+    return false;
+  };
 
 }]);
