@@ -50,10 +50,13 @@ Boilerplate
 1. Install MongoDB, Express, Node.js and git on your machine
 2. Run "npm install"
 4. Run the server with "node server.js"
-5. Wait to see the following in you command line "App listening on port 8080"
-6. Open your browser and go [here](http://localhost:8080) to see it live
+5. Wait to see the following in you command line "App listening on port 3000"
+6. Open your browser and go [here](http://localhost:3000) to see it live
 
 ##Git Workflow
 There are three main branches, develop, test, production
 You should have a copy of develop locally which you will use to fork your feature branches out of.
 Once you have finished a feature, first pull the develop branch down, then merge in your feature branch and create a pull request.
+
+##Info
+"Thing" is built as an example model and will be removed before production. Take a look at the Thing code throughout the app if you have questions on how to implement.

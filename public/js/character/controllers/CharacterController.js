@@ -10,6 +10,14 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
+  // tab navigation
+  $scope.tab = 1;
+  $scope.setTab = function (tabId) {
+    this.tab = tabId;
+  };
+  $scope.isSet = function (tabId) {
+    return this.tab === tabId;
+  };
   // at save button click
   $scope.submit = function(build) {
     $scope.submitted = true;

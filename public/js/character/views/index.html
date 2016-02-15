@@ -1,10 +1,18 @@
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <div class="page-header">
-    <h3>Cost: {{ cost }} </h3>
+    <h3>Build Cost: {{ cost }} </h3>
+    <ul class="nav nav-pills">
+      <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Tab 1</a></li>
+      <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Tab 2</a></li>
+      <li ng-class="{active:isSet(3)}"><a href ng-click="setTab(3)">Tab 3</a></li>
+      <li ng-class="{active:isSet(4)}"><a href ng-click="setTab(4)">Tab 4</a></li>
+      <li ng-class="{active:isSet(5)}"><a href ng-click="setTab(5)">Tab 5</a></li>
+    </ul>
 <form name="characterForm" id="character-form" ng-submit="submit(build)" class="form-left" name="characterForm">
 
 <div class="multi-form">
+<div ng-show="isSet(1)">
 <!-- basics -->
 <div class="formgroup">
   <label>Character Name</label>
@@ -75,7 +83,9 @@
     <p ng-hide="!invalid.racialProficiency" style="color:red;">Only purchasable by High Orc, High Ogre and Wylderkin</p>
 </div>
 <!-- /basics -->
+</div>
 <!-- crafts/trades -->
+<div ng-show="isSet(2)">
 <div class="formgroup">
   <h3>Crafts and Trades</h3>
   <label>Alchemy</label>
@@ -104,7 +114,9 @@
     <p ng-hide="!invalid.herbalLore" style="color:red;">Must Purchase Read and Write</p>
 </div>
 <!-- /crafts/trades -->
+</div>
 <!-- marshal skills -->
+<div ng-show="isSet(3)">
 <div class="formgroup">
   <h4>Fighter Skills</h4>
   <label>Weapon Proficiency</label>
@@ -146,8 +158,9 @@
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.shatter" id="weaponSkills.shatter" ng-class="{'invalid': invalid.shatter}"/><br />
 </div>
 <!-- marshal skills -->
+</div>
 <!-- scholar skills -->
-<h2>Spells</h2>
+<div ng-show="isSet(4)">
 <div class="formgroup">
   <h3>Scholar Skills</h3>
   <label>Read and Write</label>
@@ -162,6 +175,7 @@
   <p ng-hide="!invalid.readMagic" style="color:red;">Must Purchase Read and Write</p>
 </div>
 <div class="formgroup">
+  <h3>Spells</h3>
   <table>
     <tr>
       <td>
@@ -199,7 +213,9 @@
   </table>
 </div>
 <!-- /scholar skills -->
+</div>
 <!-- weapon skills -->
+<div ng-show="isSet(5)">
 <div class="formgroup">
   <h4>Weapon Skills</h4>
   <label>Archery</label>
@@ -237,6 +253,7 @@
   <input type="checkbox" class="checkbox" ng-model="build.weapons.styleMaster" id="weaponSkills.styleMaster" ng-class="{'invalid': invalid.styleMaster}"/><br />
 </div>
 <!-- /weapon skills -->
+</div>
 
 
 </div>
