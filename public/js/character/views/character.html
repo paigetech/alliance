@@ -2,6 +2,9 @@
   <div class="col-xs-6 col-xs-offset-3">
     <div class="page-header">
     <h3>Build Cost: {{ cost }} </h3>
+    <div class="alert alert-danger" ng-show="formInvalid">
+      <p>Part of your Build is invalid!</p>
+    </div>
     <ul class="nav nav-pills">
       <li ng-class="{active:isSet(1)}"><a href ng-click="setTab(1)">Basic Info</a></li>
       <li ng-class="{active:isSet(2)}"><a href ng-click="setTab(2)">Crafts and Trades</a></li>
@@ -52,35 +55,46 @@
   <h3>Racial Skills</h3>
   <label>Break Command</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.breakCommand" id="racials.breakCommand" ng-class="{'invalid': invalid.breakCommand}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.breakCommand">This race can not purchase Break Command</p>
   <label>Claws</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.claws" id="racials.claws" ng-class="{'invalid': invalid.claws}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.claws">This race can not purchase Claws</p>
   <label>Gypsy Curse</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.gypsyCurse" id="racials.gypsyCurse" ng-class="{'invalid': invalid.gypsyCurse}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.gypsyCurse">This race can not purchase Gypsy Curse</p>
   <label>Racial Assasinate</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.racialAssasinate" id="racials.racialAssasinate" ng-class="{'invalid': invalid.racialAssasinate}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.racialAssasinate">This race can not purchase Racial Assasinate</p>
   <label>Resist Binding</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistBinding" id="racials.resistBinding" ng-class="{'invalid': invalid.resistBinding}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistBinding">This race can not purchase Resist Binding</p>
   <label>Resist Command</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistCommand" id="racials.resistCommand" ng-class="{'invalid': invalid.resistCommand}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistCommand">This race can not purchase Resist Command</p>
   <label>Resist Element</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistElement" id="racials.resistElement" ng-class="{'invalid': invalid.resistElement}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistElement">This race can not purchase Resist Element</p>
   <label>Resist Fear</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistFear" id="racials.resistFear" ng-class="{'invalid': invalid.racials.resistFear}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistFear">This race can not purchase Resist Fear</p>
   <label>Resist Magic</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistMagic" id="racials.resistMagic" ng-class="{'invalid': invalid.resistMagic}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistMagic">This race can not purchase Resist Magic</p>
   <label>Resist Necromancy</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistNecromancy" id="racials.resistNecromancy" ng-class="{'invalid': invalid.resistNecromancy}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistNecromacy">This race can not purchase Resist Necromancy</p>
   <label>Resist Poison</label>
     <input type="number" class="form-control" min="0" ng-model="build.racials.resistPoison" id="racials.resistPoison" ng-class="{'invalid': invalid.resistPoison}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.resistPoison">This race can not purchase Resist Poison</p>
   <label>Racial Dodge</label>
     <input type="checkbox" class="checkbox" min="0" ng-model="build.racials.racialDodge" id="racials.racialDodge" ng-class="{'invalid': invalid.racialDodge}" /><br />
-    <p ng-hide="!invalid.racialDodge" style="color:red;">Only purchasable by Hobblings and Wylderkin</p>
+    <p class="alert alert-danger" ng-show="invalid.racialDodge">This race can not purchase Racial Dodge</p>
   <label>Racial Slay</label>
     <input type="checkbox" class="checkbox" min="0" ng-model="build.racials.racialSlay" id="racials.racialSlay" ng-class="{'invalid': invalid.racialSlay}"/><br />
-    <p ng-hide="!invalid.racialSlay" style="color:red;">Only purchasable by High Orc and Wylderkin</p>
+    <p class="alert alert-danger" ng-show="invalid.racialSlay">This race can not purchase Racial Slay</p>
   <label>Racial Proficiency</label>
     <input type="checkbox" class="checkbox" min="0" ng-model="build.racials.racialProficiency" id="racials.racialProficiency" ng-class="{'invalid': invalid.racialProficiency}"/><br />
-    <p ng-hide="!invalid.racialProficiency" style="color:red;">Only purchasable by High Orc, High Ogre and Wylderkin</p>
+    <p class="alert alert-danger" ng-show="invalid.racialProficiency">This race can not purchase Racial Proficiency</p>
 </div>
 <!-- /basics -->
 </div>
@@ -95,8 +109,10 @@
     <input type="number" class="form-control" min="0" ng-model="build.crafts.blacksmith" id="crafts.blacksmith" ng-class="{'invalid': invalid.blacksmith}"/><br />
   <label>Create Potion</label>
     <input type="number" class="form-control" min="0" ng-model="build.crafts.createPotion" id="crafts.createPotion" ng-class="{'invalid': invalid.createPotion}"/><br />
+    <p ng-hide="!invalid.createPotion" style="color:red;">Must Purchase Read Write, First Aid, and at least one Earth spell</p>
   <label>Create Scroll</label>
     <input type="number" class="form-control" min="0" ng-model="build.crafts.createScroll" id="crafts.createScroll" ng-class="{'invalid': invalid.createScroll}"/><br />
+    <p ng-hide="!invalid.createScroll" style="color:red;">Must Purchase Read Write, Read Magic, and at least one Celestial spell</p>
   <label>Create Trap</label>
     <input type="number" class="form-control" min="0" ng-model="build.crafts.createTrap" id="crafts.createTrap" ng-class="{'invalid': invalid.createTrap}"/><br />
     <p ng-hide="!invalid.createTrap" style="color:red;">Must Purchase Legerdermain</p>
@@ -120,15 +136,18 @@
 <div class="formgroup">
   <h4>Fighter Skills</h4>
   <label>Weapon Proficiency</label>
-    <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.weaponproficiency" id="weaponSkills.weaponproficiency" ng-class="{'invalid': invalid[weaponproficiency]}"/><br />
+    <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.weaponproficiency" id="weaponSkills.weaponproficiency" ng-class="{'invalid': invalid.weaponproficiency}"/><br />
   <label>Critical Attack</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.criticalattack" id="weaponSkills.criticalattack" ng-class="{'invalid': invalid[criticalattack]}"/><br />
   <label>Eviscerate</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.eviscerate" id="weaponSkills.eviscerate" ng-class="{'invalid': invalid.eviscerate}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.eviscerate">not enough weapon profs</p>
   <label>Parry</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.parry" id="weaponSkills.parry" ng-class="{'invalid': invalid.parry}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.parry">not enough weapon profs</p>
   <label>Slay</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.slay" id="weaponSkills.slay" ng-class="{'invalid': invalid.slay}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.slay">not enough weapon profs</p>
   
   <h4>Rogue Skills</h4>
   <label>Backstab</label>
@@ -137,25 +156,32 @@
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.backattack" id="weaponSkills.backattack" ng-class="{'invalid': invalid.backattack}"/><br />
   <label>Assasinate</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.assasinate" id="weaponSkills.assasinate" ng-class="{'invalid': invalid.assasinate}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.assasinate">not enough backstabs</p>
   <label>Dodge</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.dodge" id="weaponSkills.dodge" ng-class="{'invalid': invalid.dodge}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.dodge">not enough backstabs</p>
   <label>Evade</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.evade" id="weaponSkills.evade" ng-class="{'invalid': invalid.evade}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.evade">not enough backstabs</p>
   <label>Terminate</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.terminate" id="weaponSkills.terminate" ng-class="{'invalid': invalid.terminate}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.terminate">not enough backstabs</p>
   <label>Waylay</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.waylay" id="weaponSkills.waylay" ng-class="{'invalid': invalid.waylay}"/><br />
   
   <h4>Shared Skills</h4>
   <label>Disarm</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.disarm" id="weaponSkills.disarm" ng-class="{'invalid': invalid.disarm}"/><br />
+    <p class="alert alert-danger" ng-show="invalid.disarm">not enough backstabs or weapon profs</p>
   <label>Stun Limb</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.stunlimb" id="weaponSkills.stunlimb" ng-class="{'invalid': invalid.stunlimb}"/><br />
     <p ng-hide="!invalid.stunlimb" style="color:red;">You must purchase 3 Weapon Proficencies or 3 Backstabs per Stun Limb</p>
   <label>Riposte</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.riposte" id="weaponSkills.riposte" ng-class="{'invalid': invalid.riposte}"/><br />
+    <p ng-hide="!invalid.riposte" style="color:red;">You must purchase 3 Weapon Proficencies or 3 Backstabs per Stun Limb</p>
   <label>Shatter</label>
     <input type="number" class="form-control" min="0" ng-model="build.weaponSkills.shatter" id="weaponSkills.shatter" ng-class="{'invalid': invalid.shatter}"/><br />
+    <p ng-hide="!invalid.shatter" style="color:red;">You must purchase 2 Weapon Proficencies or 2 Backstabs per Stun Limb</p>
 </div>
 <!-- marshal skills -->
 </div>
@@ -251,13 +277,14 @@
   <input type="checkbox" class="checkbox" ng-model="build.weapons.shield" id="weaponSkills.shield" ng-class="{'invalid': invalid.shield}"/><br />
   <label>Style Master</label>
   <input type="checkbox" class="checkbox" ng-model="build.weapons.styleMaster" id="weaponSkills.styleMaster" ng-class="{'invalid': invalid.styleMaster}"/><br />
+    <p ng-hide="!invalid.styleMaster" style="color:red;">You must purchase other things?</p>
 </div>
 <!-- /weapon skills -->
 </div>
 
 
 </div>
-<button type="submit" class="btn btn-primary" ng-disabled="formInvalid">Submit </button>
+<button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
     </div>
   </div>
 </div>
