@@ -1,6 +1,7 @@
 var Thing = require('./models/thing');  // load the thing mongoose model - change as needed
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
 var Character = require('./models/character');
+var Reg = require('./models/registration');
 
 module.exports = function(app, passport) {
   // api ---------------------------------------------------------------------
@@ -247,6 +248,36 @@ module.exports = function(app, passport) {
         res.send(err);
       }
       res.send();
+    });
+  });
+  // end character
+
+  // registration
+
+  app.post('/api/registration', function(req, res) {
+    Reg.create({
+                  title : req.body.title,
+                  author : req.body.author,
+                  body : req.body.body,
+                  hidden : req.body.hidden,
+                  user : req.body.user
+    }, function(err, thing) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(thing);
+    });
+  });
+
+  // get all registrations
+  app.get('/api/registrations', function(req, res) {
+    // use mongoose to get all things from the db
+    Reg.find(function(err, regs) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(things);
     });
   });
 };
