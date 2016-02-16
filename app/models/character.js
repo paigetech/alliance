@@ -1,7 +1,7 @@
-// thing mongoose model - needs to be populated or removed
 var mongoose = require('mongoose');
 
 var characterSchema = mongoose.Schema({
+  "user": String,
   "characterName": String,
     "weaponSkills":{
       "weaponproficiency": Number,
@@ -31,7 +31,7 @@ var characterSchema = mongoose.Schema({
       "7": Number,
       "8": Number,
       "9": Number,
-      "1 Number": Number
+      "10": Number
       },
     "celestial":{
       "1": Number,
@@ -43,7 +43,7 @@ var characterSchema = mongoose.Schema({
       "7": Number,
       "8": Number,
       "9": Number,
-      "1 Number": Number
+      "10": Number
       },
     "weapons":{
       "archery": Boolean,

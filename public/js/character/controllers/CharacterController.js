@@ -4,7 +4,9 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.build = Character.build;
   $scope.cost = Character.cost;
   //pull in the global user object
-  $scope.user = User;
+  if(User) {
+    $scope.build.user = User.email;
+  }
   // booleans to show/hide alerts
   $scope.submitted = false;
   $scope.showErrorAlert = false;
@@ -18,6 +20,28 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.isSet = function (tabId) {
     return this.tab === tabId;
   };
+  //editor enable
+  $scope.editorEnabled = false;
+
+  $scope.editor = function() {
+    if ($scope.editorEnabled === true) {
+      $scope.editorEnabled = false;
+    } else if ($scope.editorEnabled === false) {
+      $scope.editorEnabled = true;
+    }
+  }
+  $scope.disableEditor = function() {
+    $scope.editorEnabled = false;
+  }
+  // check for presence in build
+  $scope.check = function(item){
+    if( item === 0 || item === false || item === "0" || item === null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // at save button click
   $scope.submit = function(build) {
     $scope.submitted = true;
@@ -48,7 +72,8 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
         $scope.errorAlert = "No Character for that ID";
 
       } else {
-        $scope.character = data;
+        $scope.build = data;
+        $scope.cost = Character.totalCost($scope.build, $scope.build.pcClass, $scope.build.races);
       }
     })
     .error(function (err) {
@@ -60,14 +85,9 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
     $scope.saved = true;
 
     // user obj we are sending to the server
-    var post = {
-      name : character.name,
-      pcClass : character.pcClass,
-      race : character.race
-      //we don't edit the user ever
-    };
+    var post = character;
 
-    $http.post("/api/character/" + $scope.character._id , post)
+    $http.post("/api/character/" + $scope.build._id , post)
     .success(function (data, status) {
       console.log('Successful character!' + JSON.stringify(post));
       // if successfull redirect to /
@@ -80,7 +100,7 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
     });
   };
   $scope.delete = function(character) {
-    $http.delete("/api/character/" + $scope.character._id);
+    $http.delete("/api/character/" + $scope.build._id);
   };
 
   $scope.$watch('build', function(newVal, oldVal) {
@@ -91,7 +111,7 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
     Character.weaponsValid(newVal.weapons);
     Character.scholarSkillsValid(newVal.scholarSkills);
     Character.racialsValid(newVal.racials);
-    $scope.cost = Character.totalCost(newVal);
+    $scope.cost = Character.totalCost(newVal, $scope.build.pcClass, $scope.build.races);
     $scope.invalid = Character.invalidCheck();
 
     if (hasOwnValue($scope.invalid , true)) {

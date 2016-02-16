@@ -113,9 +113,8 @@ app.service('Character', function () {
   
     this.change = 0;
 
-    this.totalCost = function(build){
+    this.totalCost = function(build, pcClass, race){
       cost = 0;
-      pcClass = this.build.pcClass;
       //take the build object and pull ref out of the cost obj the multiply
       for (var key in build) {
         //check for earth/celestial

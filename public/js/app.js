@@ -35,7 +35,7 @@ app.config(function ($routeProvider, $locationProvider) {
   })
   .when('/character', {
     controller: 'CharacterController',
-    templateUrl: 'js/character/views/index.html'
+    templateUrl: 'js/character/views/character.html'
   })
   .when('/character/:id', {
     controller: 'CharacterController',
