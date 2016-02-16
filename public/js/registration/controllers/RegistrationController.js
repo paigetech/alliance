@@ -7,8 +7,8 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
-  // thing model for our view
-  $scope.thing = {
+  // reg model for our view
+  $scope.reg = {
     title : '',
     author : '',
     body : '',
@@ -16,19 +16,18 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
     user: User.email,
   }
   // at save button click
-  $scope.submit = function(thing) {
+  $scope.submit = function(reg) {
     $scope.submitted = true;
 
-    // thing obj we are sending to the server
+    // reg obj we are sending to the server
     var post = {
-      title : thing.title,
-      author : thing.author,
-      body : thing.body,
-      hidden : thing.hidden,
-      user: thing.user
+      title : reg.title,
+      body : reg.body,
+      hidden : reg.hidden,
+      user: reg.user
     };
 
-    $http.post("/api/things", post)
+    $http.post("/api/registration", post)
     .success(function (data, status) {
       // if successfull redirect to /
       $window.location.href = '/';
@@ -40,10 +39,10 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
     });
   };
 
-  $http.get("/api/things")
+  $http.get("/api/registrations")
   .success(function (data) {
-    $scope.things = data;
-    console.log("Thing: " + data);
+    $scope.regs = data;
+    console.log("reg: " + data);
   })
   .error(function (err) {
     console.log('Error: ' + err);
