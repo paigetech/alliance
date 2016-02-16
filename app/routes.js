@@ -1,5 +1,6 @@
 var Thing = require('./models/thing');  // load the thing mongoose model - change as needed
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
+var Craft = require('./models/craft');
 
 module.exports = function(app, passport) {
   // api ---------------------------------------------------------------------
@@ -155,4 +156,32 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
+
+  // craft routes
+  app.post('/api/craft', function(req, res) {
+          console.log('req body: ' + JSON.stringify(req.body));
+    Craft.create({
+                  title : req.body.title,
+                  user : req.body.user
+    }, function(err, craft) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(craft);
+    });
+  });
+
+  // get all things
+  app.get('/api/crafts', function(req, res) {
+    // use mongoose to get all things from the db
+    Craft.find(function(err, craft) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(craft);
+    });
+  });
+
+
 };
