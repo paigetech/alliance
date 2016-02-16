@@ -1,6 +1,5 @@
 app.service('Character', function () {
   //example
-    this.invalidMessage = "";
     this.build = {};
     this.build.characterName = "Panda";
     this.build.weaponSkills = {

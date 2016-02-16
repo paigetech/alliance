@@ -38,6 +38,7 @@
   background: #FF6600;
 }
 
-#invalid {
+.invalid {
   color: red;
+  border: solid 1px red;
 }
