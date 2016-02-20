@@ -1,7 +1,7 @@
-app.controller('ProfileController', ['$scope', '$http', '$window', 'User', function($scope, $http, $window, User) {
+app.controller('ProfileController', ['$scope', '$http', '$window', function($scope, $http, $window) {
 
 
-  $http.get("/api/things/" + User.email)
+  $http.get("/api/things/" + $scope.user.email)
   .success(function (data) {
     $scope.userThings = data;
   })
@@ -9,7 +9,7 @@ app.controller('ProfileController', ['$scope', '$http', '$window', 'User', funct
     console.log('Error: ' + err);
   });
 
-  $http.get("/api/characters/" + User.email)
+  $http.get("/api/characters/" + $scope.user.email)
   .success(function (data) {
     $scope.characters = data;
   })

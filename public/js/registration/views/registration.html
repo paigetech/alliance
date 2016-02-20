@@ -4,14 +4,19 @@
      <h1>Registration</h1>
      <p>User: {{user}}</p>
     </div>
-    <form name="thingForm" ng-submit="submit(thing)">
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" name="title" placeholder="Write a title?" ng-model="thing.title" required>
-      </div>
+    <form name="thingForm" ng-submit="submit(reg)">
       <div class="form-group">
         <label>Body</label>
-        <input type="text" class="form-control" name="Body" placeholder="Write about stuff?" ng-model="thing.body" required>
+        <input type="text" class="form-control" name="Body" placeholder="Write about stuff?" ng-model="reg.body" required>
+      </div>
+      <div class="form-group" ng-repeat="(key, value) in characters">
+        <hr />
+        <input type="checkbox" ng-model="reg.value._id" name="character" >
+
+        <h2><a href="/character/{{value._id}}">Character</a></h2>
+        <p>Name: {{value.characterName}}</p>
+        <p>Race: {{value.races}}</p>
+        <p>Class: {{value.pcClass}}</p>
       </div>
       <span ng-show="showErrorAlert" class="alert">
         <p>There is an error!</p>

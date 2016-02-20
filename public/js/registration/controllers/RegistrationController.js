@@ -1,7 +1,5 @@
-app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', function($scope, $http, $window, User) {
+app.controller('RegistrationController', ['$scope', '$http', '$window', function($scope, $http, $window) {
 
-  //pull in the global user object
-  $scope.user = User;
   // booleans to show/hide alerts
   $scope.submitted = false;
   $scope.showErrorAlert = false;
@@ -13,7 +11,7 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
     author : '',
     body : '',
     hidden : false,
-    user: User.email,
+    user: $scope.user.email,
   }
   // at save button click
   $scope.submit = function(reg) {
@@ -21,9 +19,7 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
 
     // reg obj we are sending to the server
     var post = {
-      title : reg.title,
       body : reg.body,
-      hidden : reg.hidden,
       user: reg.user
     };
 
@@ -48,5 +44,12 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', 'User', 
     console.log('Error: ' + err);
   });
 
+  $http.get("/api/characters/" + $scope.user.email)
+  .success(function (data) {
+    $scope.characters = data;
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
 
 }]);
