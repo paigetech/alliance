@@ -6,7 +6,6 @@ app.controller('CraftController', ['$scope', '$http', '$window', function($scope
   $scope.errorAlert = '';
 
   $scope.craft = {
-    title : '',
     user: $scope.user.email,
     totalCost: 0
   };
@@ -233,11 +232,24 @@ app.controller('CraftController', ['$scope', '$http', '$window', function($scope
   $scope.submit = function(craft) {
     $scope.submitted = true;
 
-    // thing obj we are sending to the server
-    // TODO add attributes to post object
+    // craft obj we are sending to the server
     var post = {
-      title : craft.title,
-      user: craft.user
+      user: craft.user,
+      totalCost: craft.totalCost,
+      scrolls: craft.scrolls,
+      potions: craft.potions,
+      weapons: craft.weapons,
+      alchemyContact: craft.alchemyContact,
+      alchemyElixir: craft.alchemyElixir,
+      alchemyGas: craft.alchemyGas,
+      alchemyWeapon: craft.alchemyWeapon,
+      trapsGas: craft.trapsGas,
+      trapsNoisemaker: craft.trapsNoisemaker,
+      trapsWeapon: craft.trapsWeapon,
+      trapsFlameAcid: craft.trapsFlameAcid,
+      trapsExplosive: craft.trapsExplosive,
+      trapsMechanical: craft.trapsMechanical,
+      armor: craft.armor
     };
 
     $http.post("/api/craft", post)
