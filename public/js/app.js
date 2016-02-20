@@ -33,6 +33,10 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'CraftController',
     templateUrl: 'js/craft/views/craft.html'
   })
+  .when('/crafts', {
+    controller: 'CraftController',
+    templateUrl: 'js/craft/views/crafts.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'js/home/views/home.html'
