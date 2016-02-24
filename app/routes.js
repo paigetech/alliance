@@ -2,6 +2,7 @@ var Thing = require('./models/thing');  // load the thing mongoose model - chang
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
 var Character = require('./models/character');
 var Reg = require('./models/registration');
+var Item = require('./models/item');
 
 module.exports = function(app, passport) {
   // api ---------------------------------------------------------------------
@@ -260,11 +261,11 @@ module.exports = function(app, passport) {
                   character : req.body.character,
                   hidden : req.body.hidden,
                   user : req.body.user
-    }, function(err, thing) {
+    }, function(err, reg) {
       if (err) {
         res.send(err);
       }
-      res.json(thing);
+      res.json(reg);
     });
   });
 
@@ -292,4 +293,28 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.post('/api/item', function(req, res) {
+    Item.create({
+      User : req.body.user,
+      Character : req.body.character,
+      MIID : req.body.MIID,
+      RepID : req.body.repID,
+      ItemType : req.body.itemType,
+      PhysRepDesc : req.body.physRepDesc,
+      Restriction : req.body.restriction,
+      Flaw : req.body.flaw,
+      Notes : req.body.notes,
+      RitualEffect : req.body.ritualEffect,
+      Uses : req.body.uses,
+      Aspect : req.body.aspect,
+      Type : req.body.type,
+      Expiration : req.body.expiration
+    }, function(err, item) {
+      if (err) {
+        res.send(err);
+      }
+      console.log("Item: " + JSON.stringify(req.body));
+      res.json(item);
+    });
+  });
 };

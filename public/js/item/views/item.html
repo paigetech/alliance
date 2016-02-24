@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+      <h3>Build Cost: {{ cost }} </h3>
+      <div class="alert alert-danger" ng-show="formInvalid">
+        <p>Part of your Build is invalid!</p>
+      </div>
+    </div>
+  <form name="itemForm" id="character-form" ng-submit="submit(item)" class="form-left" name="itemForm">
+    <div class="multi-form">
+      <div class="formgroup">
+        <label>Character </label><input type="text" ng-model="item.character" value="item.character" /><br />
+        <label>Magic Item ID </label><input type="text" ng-model="item.MIID" value="item.MIID" /><br />
+        <label>Rep ID </label><input type="text" ng-model="item.repID" value="item.repID" /><br />
+        <label>Item Type </label><input type="text" ng-model="item.itemType" value="item.itemType" /><br />
+        <label>Phys Rep Desc </label><input type="text" ng-model="item.physRepDesc" value="item.physRepDesc" /><br />
+        <label>Restriction </label><input type="text" ng-model="item.restriction" value="item.restriction" /><br />
+        <label>Flaw </label><input type="text" ng-model="item.flaw" value="item.flaw" /><br />
+        <label>Notes </label><input type="text" ng-model="item.notes" value="item.notes" /><br />
+        <label>Ritual Effect </label><input type="text" ng-model="item.ritualEffect" value="item.ritualEffect" /><br />
+        <label>Uses </label><input type="text" ng-model="item.uses" value="item.uses" /><br />
+        <label>Aspect </label><input type="text" ng-model="item.aspect" value="item.aspect" /><br />
+        <label>Type </label><input type="text" ng-model="item.type" value="item.type" /><br />
+        <label>Expiraction </label><input type="text" ng-model="item.expiraction" value="item.expiraction" /><br />
+        <button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
+      </div>
+    </div>
+  </div>
+</div>

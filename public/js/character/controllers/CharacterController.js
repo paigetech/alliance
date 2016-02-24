@@ -45,7 +45,6 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
 
     // character obj we are sending to the server
     var post = build;
-    console.log("Post: " + post);
 
     $http.post("/api/character", post)
     .success(function (data, status) {
