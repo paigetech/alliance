@@ -270,8 +270,11 @@ function calculateCost(objectWatched) {
   var total = 0;
   for (var item in objectWatched) {
     for (var subItem in objectWatched[item]) {
-      var kraft = objectWatched[item][subItem];
-      total += parseInt(kraft.amount * kraft.cost);
+      if (objectWatched[item][subItem].amount) {
+        var kraft = objectWatched[item][subItem];
+        total += parseInt(kraft.amount * kraft.cost);
+      }
+
     }
   }
   return total;
