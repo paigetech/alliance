@@ -256,9 +256,8 @@ module.exports = function(app, passport) {
 
   app.post('/api/registration', function(req, res) {
     Reg.create({
-                  title : req.body.title,
-                  author : req.body.author,
                   body : req.body.body,
+                  character : req.body.character,
                   hidden : req.body.hidden,
                   user : req.body.user
     }, function(err, thing) {
@@ -280,4 +279,17 @@ module.exports = function(app, passport) {
       res.json(regs);
     });
   });
+
+  // get registration by parameters
+  app.get('/api/registrations/:value', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Reg.find({ user: req.params.value }, function(err, registrations) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(registrations);
+    });
+  });
+
 };

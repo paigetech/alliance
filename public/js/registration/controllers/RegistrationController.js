@@ -7,8 +7,7 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
   $scope.errorAlert = '';
   // reg model for our view
   $scope.reg = {
-    title : '',
-    author : '',
+    character : '',
     body : '',
     hidden : false,
     user: $scope.user.email,
@@ -20,11 +19,13 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     // reg obj we are sending to the server
     var post = {
       body : reg.body,
-      user: reg.user
+      user: reg.user,
+      character: reg.character
     };
 
     $http.post("/api/registration", post)
     .success(function (data, status) {
+      console.log("Post " + JSON.stringify(post));
       // if successfull redirect to /
       $window.location.href = '/';
     })
@@ -35,7 +36,7 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     });
   };
 
-  $http.get("/api/registrations")
+  $http.get("/api/registrations/" + $scope.user.email)
   .success(function (data) {
     $scope.regs = data;
     console.log("reg: " + data);

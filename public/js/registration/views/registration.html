@@ -9,16 +9,12 @@
         <label>Body</label>
         <input type="text" class="form-control" name="Body" placeholder="Write about stuff?" ng-model="reg.body" required>
       </div>
+      <label>Select a Character</label>
       <div class="form-group" ng-repeat="(key, value) in characters">
-        <hr />
-        <input type="checkbox" ng-init="model[$index] = 'reg.' + value._id" ng-model="model[$index]" name="character" >
-        <p >Test: {{test1}}</p>
-        <p>Test: {{value._id}}</p>
+        <label>
+          <input type="radio" ng-model="reg.character" value="{{value._id}}" > {{value.characterName}}</label>
+      <br />
 
-        <h2><a href="/character/{{value._id}}">Character</a></h2>
-        <p>Name: {{value.characterName}}</p>
-        <p>Race: {{value.races}}</p>
-        <p>Class: {{value.pcClass}}</p>
       </div>
       <span ng-show="showErrorAlert" class="alert">
         <p>There is an error!</p>

@@ -3,10 +3,6 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.invalidMessage = Character.invalidMessage;
   $scope.build = Character.build;
   $scope.cost = Character.cost;
-  //pull in the global user object
-  if(User) {
-    $scope.build.user = User.email;
-  }
   // booleans to show/hide alerts
   $scope.submitted = false;
   $scope.showErrorAlert = false;
@@ -20,6 +16,7 @@ app.controller('CharacterController', ['$scope', '$http', '$window', 'User', '$r
   $scope.isSet = function (tabId) {
     return this.tab === tabId;
   };
+  $scope.build.user = $scope.user.email;
   //editor enable
   $scope.editorEnabled = false;
 

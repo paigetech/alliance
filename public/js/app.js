@@ -45,6 +45,14 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'RegistrationController',
     templateUrl: 'js/registration/views/registration.html'
   })
+  .when('/registrations', {
+    controller: 'RegistrationController',
+    templateUrl: 'js/registration/views/registrations.html'
+  })
+  .when('/registration/:id', {
+    controller: 'RegistrationController',
+    templateUrl: 'js/registration/views/registration_id.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'js/home/views/home.html'
