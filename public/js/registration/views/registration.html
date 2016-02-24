@@ -11,7 +11,9 @@
       </div>
       <div class="form-group" ng-repeat="(key, value) in characters">
         <hr />
-        <input type="checkbox" ng-model="reg.value._id" name="character" >
+        <input type="checkbox" ng-init="model[$index] = 'reg.' + value._id" ng-model="model[$index]" name="character" >
+        <p >Test: {{test1}}</p>
+        <p>Test: {{value._id}}</p>
 
         <h2><a href="/character/{{value._id}}">Character</a></h2>
         <p>Name: {{value.characterName}}</p>
