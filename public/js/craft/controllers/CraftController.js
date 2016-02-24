@@ -7,7 +7,8 @@ app.controller('CraftController', ['$scope', '$http', '$window', function($scope
 
   $scope.craft = {
     user: $scope.user.email,
-    totalCost: 0
+    totalCost: 0,
+    name:  ""
   };
 
   $scope.craft.scrolls = [
@@ -235,6 +236,7 @@ app.controller('CraftController', ['$scope', '$http', '$window', function($scope
     // craft obj we are sending to the server
     var post = {
       user: craft.user,
+      name: craft.name,
       totalCost: craft.totalCost,
       scrolls: craft.scrolls,
       potions: craft.potions,

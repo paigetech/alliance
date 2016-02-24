@@ -7,6 +7,13 @@
         <form name="craftForm">
             <h2>Total Cost: {{ craft.totalCost }}</h2>
             <div class="form-group">
+
+                <label> Name for this set of skills:
+                    <input class="form-control"
+                       value="{{ craft.name }}"
+                       ng-model="craft.name">
+                </label>
+
                 <div>
                     <!--SCROLLS-->
                     <div>

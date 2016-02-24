@@ -106,6 +106,7 @@ module.exports = function(app, passport) {
     console.log('req body: ' + JSON.stringify(req.body));
     Craft.create({
                   user : req.body.user,
+                  name: req.body.name,
                   totalCost: req.body.totalCost,
                   scrolls: req.body.scrolls,
                   potions: req.body.potions,

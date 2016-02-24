@@ -6,6 +6,7 @@ var craftSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  name: String,
   scrolls: [],
   potions: [],
   weapons: [],
