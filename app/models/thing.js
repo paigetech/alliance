@@ -21,7 +21,7 @@ var thingSchema = mongoose.Schema({
     type: Date, 
     default: Date.now 
   },
-  hidden: Boolean,
+  hidden: Boolean
 });
 
 module.exports = mongoose.model('Thing', thingSchema);

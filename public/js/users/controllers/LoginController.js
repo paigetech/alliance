@@ -32,7 +32,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function($scope
     .success(function (data, status) {
       console.log('Successful login. user: ' + JSON.stringify(data));
       // if successfull redirect to /
-      $window.location.href = '/';
+      $window.location.href = '/profile';
     })
     .error(function (data) {
       console.log('Error: ' + data);
