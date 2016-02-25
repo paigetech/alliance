@@ -1,5 +1,7 @@
 var Thing = require('./models/thing');  // load the thing mongoose model - change as needed
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
+var Character = require('./models/character');
+var Reg = require('./models/registration');
 var Craft = require('./models/craft');
 
 module.exports = function(app, passport) {
@@ -200,6 +202,140 @@ module.exports = function(app, passport) {
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+  });
+
+  // character
+  app.post('/api/character', function(req, res) {
+          console.log('req body: ' + JSON.stringify(req.body));
+    Character.create({
+      user: req.body.user,
+      characterName: req.body.characterName,
+      races: req.body.races,
+      pcClass: req.body.pcClass,
+      weaponSkills: req.body.weaponSkills,
+      earth: req.body.earth,
+      celestial: req.body.celestial,
+      weapons: req.body.weapons,
+      scholarSkills: req.body.scholarSkills,
+      crafts: req.body.crafts,
+      racials: req.body.racials
+    }, function(err, character) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(character);
+    });
+  });
+
+  // get character by parameters
+  app.get('/api/characters/:value', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Character.find({ user: req.params.value }, function(err, characters) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(characters);
+    });
+  });
+
+  // get character by id
+  app.get('/api/character/:id', function(req, res) {
+    // use mongoose to find the character by id requested
+    Character.findById(req.params.id, function(err, character) {
+      if(err) {
+        res.send(err);
+      } else {
+      res.json(character);
+      }
+    });
+  });
+
+  // update a character by id
+  app.post('/api/character/:id', function(req, res) {
+    Character.findById(req.params.id, function(err, build) {
+      if(err) {
+        res.send(err);
+      }
+
+        if (build) {
+          //update character properties with request
+          build.user = req.body.user;
+          build.characterName = req.body.characterName;
+          build.races = req.body.races;
+          build.pcClass = req.body.pcClass;
+          build.weaponSkills = req.body.weaponSkills;
+          build.earth = req.body.earth;
+          build.celestial = req.body.celestial;
+          build.weapons = req.body.weapons;
+          build.scholarSkills = req.body.scholarSkills;
+          build.crafts = req.body.crafts;
+          build.racials = req.body.racials
+
+          Character.update({ _id: req.params.id }, build, function (err, affected) {
+                  if (err) {
+                          res.send(err);
+                  }
+                  res.json('affected rows %d', affected);
+          });
+        } else {
+          console.log("no character!");
+        };
+    });
+  });
+
+  // delete a character by id
+  app.delete('/api/character/:id', function(req, res) {
+    Character.remove({
+      _id : req.params.id
+    },
+    function(err, character) {
+      if (err) {
+        res.send(err);
+      }
+      res.send();
+    });
+  });
+  // end character
+
+  // registration
+
+  app.post('/api/registration', function(req, res) {
+    Reg.create({
+                  body : req.body.body,
+                  character : req.body.character,
+                  hidden : req.body.hidden,
+                  user : req.body.user
+    }, function(err, thing) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(thing);
+    });
+  });
+
+  // get all registrations
+  app.get('/api/registrations', function(req, res) {
+    // use mongoose to get all things from the db
+    Reg.find(function(err, regs) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(regs);
+    });
+  });
+
+  // get registration by parameters
+  app.get('/api/registrations/:value', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Reg.find({ user: req.params.value }, function(err, registrations) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(registrations);
+    });
   });
 
 };

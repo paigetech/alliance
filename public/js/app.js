@@ -4,7 +4,7 @@ var app = angular.module('alliance', ['ngRoute', 'ngResource']);
 // User global object to check loggedin status anywhere in the app
 app.service('User', function () {
     return {};
-})
+});
 
 // route provider to redirect the user to the requested view, using a single page application setup
 app.config(function ($routeProvider, $locationProvider) {
@@ -16,6 +16,10 @@ app.config(function ($routeProvider, $locationProvider) {
   .when('/signup', {
     controller: 'SignupController',
     templateUrl: 'js/users/views/signup.html'
+  })
+  .when('/profile', {
+    controller: 'ProfileController',
+    templateUrl: 'js/users/views/profile.html'
   })
   .when('/thing', {
     controller: 'ThingController',
@@ -37,6 +41,26 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'CraftController',
     templateUrl: 'js/craft/views/crafts.html'
   })
+  .when('/character', {
+    controller: 'CharacterController',
+    templateUrl: 'js/character/views/character.html'
+  })
+  .when('/character/:id', {
+    controller: 'CharacterController',
+    templateUrl: 'js/character/views/character_id.html'
+  })
+  .when('/registration', {
+    controller: 'RegistrationController',
+    templateUrl: 'js/registration/views/registration.html'
+  })
+  .when('/registrations', {
+    controller: 'RegistrationController',
+    templateUrl: 'js/registration/views/registrations.html'
+  })
+  .when('/registration/:id', {
+    controller: 'RegistrationController',
+    templateUrl: 'js/registration/views/registration_id.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'js/home/views/home.html'
@@ -47,22 +71,11 @@ app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-app.run(function ($rootScope, $location, User, $http) {
-  $rootScope.$on('$routeChangeStart', function(event, next, current){
-    // check if user is loggedin
-    $http.get("/loggedin")
-    .success(function (data) {
-      if (data.isLoggedIn) {
-        // if user is logged in update the global obj
-        User = data;
-        console.log("poop");
-      } else {
-        $location.path('/login');
-      }
-    })
-    .error(function (err) {
-      console.log('Error: ' + err);
-    });
+app.run( function ($rootScope, $location, $route, User) {
+
+  $rootScope.$on('$routeChangeStart', function(event, next, current) {
+    console.log("User loggedin: " + User.isLoggedIn);
+    console.log("User status: " + JSON.stringify(User));
   });
 });
 
