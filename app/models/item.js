@@ -1,28 +1,19 @@
 var mongoose = require('mongoose');
 
 var itemSchema = mongoose.Schema({
-  User : {
-    type: String,
-    default : ""
-  },
-  Character : {
-    type: String,
-    default: ""
-  },
-  User : String,
-  Character : String,
+  character : String,
   MIID : String,
-  RepID : String,
-  ItemType : String,
-  PhysRepDesc : String,
-  Restriction : String,
-  Flaw : String,
-  Notes : String,
-  RitualEffect : String,
-  Uses : Number,
-  Aspect : String,
-  Type : String,
-  Expiration : Date,
+  repID : String,
+  itemType : String,
+  physRepDesc : String,
+  restriction : String,
+  flaw : String,
+  notes : String,
+  ritualEffect : String,
+  uses : Number,
+  aspect : String,
+  type : String,
+  expiration : Date,
   date: { 
     type: Date, 
     default: Date.now 
