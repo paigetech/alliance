@@ -1,0 +1,30 @@
+{
+  "name": "Alliance",
+  "description": "Alliance Registration App",
+  "main": "server.js",
+  "authors": [],
+  "license": "MIT",
+  "homepage": "https://github.com/paigetech/alliance",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-flash-alert": "~2.2.1",
+    "angular-resource": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "bootstrap": "~3.3.6",
+    "bootstrap-material-design": "~0.5.8",
+    "jquery": "~2.2.1",
+    "underscore": "~1.8.3"
+  },
+  "resolutions": {
+    "angular": "~1.5.0"
+  }
+}

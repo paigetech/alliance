@@ -4,7 +4,7 @@ var app = angular.module('alliance', ['ngRoute', 'ngResource']);
 // User global object to check loggedin status anywhere in the app
 app.service('User', function () {
     return {};
-})
+});
 
 // route provider to redirect the user to the requested view, using a single page application setup
 app.config(function ($routeProvider, $locationProvider) {
@@ -32,6 +32,14 @@ app.config(function ($routeProvider, $locationProvider) {
   .when('/thing/:id', {
     controller: 'ThingFindController',
     templateUrl: 'js/thing/views/thing_id.html'
+  })
+  .when('/craft', {
+    controller: 'CraftController',
+    templateUrl: 'js/craft/views/craft.html'
+  })
+  .when('/crafts', {
+    controller: 'CraftController',
+    templateUrl: 'js/craft/views/crafts.html'
   })
   .when('/character', {
     controller: 'CharacterController',
@@ -70,3 +78,4 @@ app.run( function ($rootScope, $location, $route, User) {
     console.log("User status: " + JSON.stringify(User));
   });
 });
+
