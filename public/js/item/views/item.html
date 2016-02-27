@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <div class="page-header">
-      <h3>Build Cost: {{ cost }} </h3>
-      <p>User: {{user.email}}</p>
-      <p>Item: {{item}}</p>
+      <h3>Input Your Magic Item </h3>
       <div class="alert alert-danger" ng-show="formInvalid">
         <p>Part of your Build is invalid!</p>
       </div>
@@ -11,7 +9,6 @@
   <form name="itemForm" id="character-form" ng-submit="submit(item)" class="form-left" name="itemForm">
     <div class="multi-form">
       <div class="formgroup">
-        <label>Character</label>
       <div class="form-group" ng-repeat="(key, value) in characters">
         <label>
           <input type="radio" ng-model="item.character" value="{{value._id}}" > {{value.characterName}}</label>

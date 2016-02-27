@@ -6,7 +6,6 @@ app.controller('ItemController', ['$scope', '$http', '$window', '$routeParams', 
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
-$scope.user.email = "foo@bar.com";
 
   $scope.editorEnabled = false;
 
