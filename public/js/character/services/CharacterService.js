@@ -1137,4 +1137,20 @@ app.service('Character', function () {
     };
 
 
-})
+});
+app.filter('characterName',['$http', function($http) {
+    return function(id, characters) {
+      //loop through object in object to find matching id to name
+      //console.log("CharacerS; " + typeof characters);
+      for (var character in characters) {
+        if(characters.hasOwnProperty(character)){
+          //console.log("characer: " + JSON.stringify(characters[character]));
+          check = characters[character];
+          if(check._id === id) {
+            console.log("Found it " + check._id);
+            return check.characterName;
+          }
+        }
+      }
+    }
+}]);

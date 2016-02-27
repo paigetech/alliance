@@ -1,0 +1,316 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+     <h1>Magic Item</h1>
+      <div ng-show="showErrorAlert" class="aleralert-danger">
+        <p>There is an error!</p>
+        <p>{{errorAlert}}</p>
+      </div>
+      <button ng-click="editor()" class="btn">Toggle Edior</button>
+      <div ng-hide="editorEnabled">
+        <p>Character : {{item.character | characterName: characters}}</p>
+        <p>Magic Item ID : {{item.MIID}}</p>
+        <p>Rep ID : {{item.repID}}</p>
+        <p>Item Type : {{item.itemType}}</p>
+        <p>Phys Rep Desc : {{item.physRepDesc}}</p>
+        <p>Restriction : {{item.restriction}}</p>
+        <p>Flaw : {{item.flaw}}</p>
+        <p>Notes : {{item.notes}}</p>
+        <p>Ritual Effect: {{item.ritualEffect}}</p>
+      </div>
+      <div ng-show="editorEnabled">
+        <form name="itemForm" id="character-form" ng-submit="submit(item)" class="form-left" name="itemForm">
+          <div class="multi-form">
+            <div class="formgroup">
+              <label>Character </label><select ng-options="character._id as character.characterName for character in characters" ng-model="item.character" value="item.character">
+                <option value="" ng-if="false"></option>
+              </select><br />
+              <label>Magic Item ID </label><input type="text" ng-model="item.MIID" value="item.MIID" /><br />
+              <label>Rep ID </label><input type="text" ng-model="item.repID" value="item.repID" /><br />
+              <label>Item Type </label><input type="text" ng-model="item.itemType" value="item.itemType" /><br />
+              <label>Phys Rep Desc </label><input type="text" ng-model="item.physRepDesc" value="item.physRepDesc" /><br />
+              <label>Restriction </label><input type="text" ng-model="item.restriction" value="item.restriction" /><br />
+              <label>Flaw </label><input type="text" ng-model="item.flaw" value="item.flaw" /><br />
+              <label>Notes </label><input type="text" ng-model="item.notes" value="item.notes" /><br />
+              <label>Ritual Effect </label><select ng-model="item.ritualEffect">
+                <option value="'<Monster Type>' Slayer '<Bonus>'" ng-selected="true">Monster Type Slayer Bonus</option>
+                <option value="Arcane Armor <Bonus>">Arcane Armor 'Bonus'</option>
+                <option value="Audible Projection">Audible Projection</option>
+                <option value="Awaken">Awaken</option>
+                <option value="Awaken Spellstrike">Awaken Spellstrike</option>
+                <option value="Bane Alteration">Bane Alteration</option>
+                <option value="Bane Binding">Bane Binding</option>
+                <option value="Bane Command">Bane Command</option>
+                <option value="Bane Curse">Bane Curse</option>
+                <option value="Bane Eldritch Force">Bane Eldritch Force</option>
+                <option value="Bane Evocation">Bane Evocation</option>
+                <option value="Bane Flame">Bane Flame</option>
+                <option value="Bane Gift">Bane Gift</option>
+                <option value="Bane Greater Command">Bane Greater Command</option>
+                <option value="Bane Healing">Bane Healing</option>
+                <option value="Bane Ice">Bane Ice</option>
+                <option value="Bane Lightning">Bane Lightning</option>
+                <option value="Bane Necromancy">Bane Necromancy</option>
+                <option value="Bane Protection/Enchantment">Bane Protection/Enchantment</option>
+                <option value="Bane Remove Curse">Bane Remove Curse</option>
+                <option value="Bane Stone">Bane Stone</option>
+                <option value="Bane Summoned Force">Bane Summoned Force</option>
+                <option value="Banish">Banish</option>
+                <option value="Banish Spellstrike">Banish Spellstrike</option>
+                <option value="Bind">Bind</option>
+                <option value="Bind Spellstrike">Bind Spellstrike</option>
+                <option value="Bless">Bless</option>
+                <option value="Bless Spellstrike">Bless Spellstrike</option>
+                <option value="Boost Duration">Boost Duration</option>
+                <option value="Cause Critical Wounds">Cause Critical Wounds</option>
+                <option value="Cause Critical Wounds Spellstrike">Cause Critical Wounds Spellstrike</option>
+                <option value="Cause Light Wounds">Cause Light Wounds</option>
+                <option value="Cause Light Wounds Spellstrike">Cause Light Wounds Spellstrike</option>
+                <option value="Cause Mortal Wounds">Cause Mortal Wounds</option>
+                <option value="Cause Mortal Wounds Spellstrike">Cause Mortal Wounds Spellstrike</option>
+                <option value="Cause Serious Wounds">Cause Serious Wounds</option>
+                <option value="Cause Serious Wounds Spellstrike">Cause Serious Wounds Spellstrike</option>
+                <option value="Cause Wounds">Cause Wounds</option>
+                <option value="Cause Wounds Spellstrike">Cause Wounds Spellstrike</option>
+                <option value="Chaos Aura">Chaos Aura</option>
+                <option value="Chaos Blade">Chaos Blade</option>
+                <option value="Chaos Blade Spellstrike">Chaos Blade Spellstrike</option>
+                <option value="Chaos Storm">Chaos Storm</option>
+                <option value="Chaos Storm Spellstrike">Chaos Storm Spellstrike</option>
+                <option value="Charm">Charm</option>
+                <option value="Charm Spellstrike">Charm Spellstrike</option>
+                <option value="Circle Lock <Item #> <Circle>">Circle Lock <Item #> <Circle></option>
+                <option value="Circle of Power">Circle of Power</option>
+                <option value="Circle of Power Spellstrike">Circle of Power Spellstrike</option>
+                <option value="Cloak Alteration">Cloak Alteration</option>
+                <option value="Cloak Binding">Cloak Binding</option>
+                <option value="Cloak Command">Cloak Command</option>
+                <option value="Cloak Curse">Cloak Curse</option>
+                <option value="Cloak Eldritch Force">Cloak Eldritch Force</option>
+                <option value="Cloak Evocation">Cloak Evocation</option>
+                <option value="Cloak Flame">Cloak Flame</option>
+                <option value="Cloak Gift">Cloak Gift</option>
+                <option value="Cloak Greater Command">Cloak Greater Command</option>
+                <option value="Cloak Healing">Cloak Healing</option>
+                <option value="Cloak Ice">Cloak Ice</option>
+                <option value="Cloak Lightning">Cloak Lightning</option>
+                <option value="Cloak Necromancy">Cloak Necromancy</option>
+                <option value="Cloak of Darkness <Target>">Cloak of Darkness <Target></option>
+                <option value="Cloak Protection/Enchantment">Cloak Protection/Enchantment</option>
+                <option value="Cloak Remove Curse">Cloak Remove Curse</option>
+                <option value="Cloak Stone">Cloak Stone</option>
+                <option value="Cloak Summoned Force">Cloak Summoned Force</option>
+                <option value="Confine">Confine</option>
+                <option value="Confine Spellstrike">Confine Spellstrike</option>
+                <option value="Construct">Construct</option>
+                <option value="Control Undead">Control Undead</option>
+                <option value="Control Undead Spellstrike">Control Undead Spellstrike</option>
+                <option value="Controlled Spirit Store">Controlled Spirit Store</option>
+                <option value="Create Undead">Create Undead</option>
+                <option value="Create Undead Spellstrike">Create Undead Spellstrike</option>
+                <option value="Cure Critical Wounds">Cure Critical Wounds</option>
+                <option value="Cure Critical Wounds Spellstrike">Cure Critical Wounds Spellstrike</option>
+                <option value="Cure Disease">Cure Disease</option>
+                <option value="Cure Disease Spellstrike">Cure Disease Spellstrike</option>
+                <option value="Cure Light Wounds">Cure Light Wounds</option>
+                <option value="Cure Light Wounds Spellstrike">Cure Light Wounds Spellstrike</option>
+                <option value="Cure Mortal Wounds">Cure Mortal Wounds</option>
+                <option value="Cure Mortal Wounds Spellstrike">Cure Mortal Wounds Spellstrike</option>
+                <option value="Cure Serious Wounds">Cure Serious Wounds</option>
+                <option value="Cure Serious Wounds Spellstrike">Cure Serious Wounds Spellstrike</option>
+                <option value="Cure Wounds">Cure Wounds</option>
+                <option value="Cure Wounds Spellstrike">Cure Wounds Spellstrike</option>
+                <option value="Curse of Undeath <Target>">Curse of Undeath <Target></option>
+                <option value="Damage Aura <Bonus>">Damage Aura <Bonus></option>
+                <option value="Death">Death</option>
+                <option value="Death Spellstrike">Death Spellstrike</option>
+                <option value="Desecrate">Desecrate</option>
+                <option value="Desecrate Spellstrike">Desecrate Spellstrike</option>
+                <option value="Destroy">Destroy</option>
+                <option value="Destroy Spellstrike">Destroy Spellstrike</option>
+                <option value="Destroy Undead">Destroy Undead</option>
+                <option value="Destroy Undead Spellstrike">Destroy Undead Spellstrike</option>
+                <option value="Destruction">Destruction</option>
+                <option value="Destruction Spellstrike">Destruction Spellstrike</option>
+                <option value="Disarm">Disarm</option>
+                <option value="Disarm Spellstrike">Disarm Spellstrike</option>
+                <option value="Disease">Disease</option>
+                <option value="Disease Spellstrike">Disease Spellstrike</option>
+                <option value="Dispel">Dispel</option>
+                <option value="Dispel Spellstrike">Dispel Spellstrike</option>
+                <option value="Dragon's Breath">Dragon's Breath</option>
+                <option value="Dragon's Breath Spellstrike">Dragon's Breath Spellstrike</option>
+                <option value="Drain">Drain</option>
+                <option value="Drain Spellstrike">Drain Spellstrike</option>
+                <option value="Earth Aura">Earth Aura</option>
+                <option value="Earth Blade">Earth Blade</option>
+                <option value="Earth Blade Spellstrike">Earth Blade Spellstrike</option>
+                <option value="Earth Storm">Earth Storm</option>
+                <option value="Earth Storm Spellstrike">Earth Storm Spellstrike</option>
+                <option value="Elemental Aura Flame">Elemental Aura Flame</option>
+                <option value="Elemental Aura Ice">Elemental Aura Ice</option>
+                <option value="Elemental Aura Lightning">Elemental Aura Lightning</option>
+                <option value="Elemental Aura Stone">Elemental Aura Stone</option>
+                <option value="Elemental Blade">Elemental Blade</option>
+                <option value="Elemental Blade Spellstrike">Elemental Blade Spellstrike</option>
+                <option value="Elemental Burst <Damage> <Element>">Elemental Burst <Damage> <Element></option>
+                <option value="Elemental Shield">Elemental Shield</option>
+                <option value="Elemental Shield Spellstrike">Elemental Shield Spellstrike</option>
+                <option value="Endow">Endow</option>
+                <option value="Endow Spellstrike">Endow Spellstrike</option>
+                <option value="Enflame">Enflame</option>
+                <option value="Enflame Spellstrike">Enflame Spellstrike</option>
+                <option value="Enhance Wand <Element(s)>">Enhance Wand <Element(s)></option>
+                <option value="Flame Blast">Flame Blast</option>
+                <option value="Flame Blast Spellstrike">Flame Blast Spellstrike</option>
+                <option value="Flame Bolt">Flame Bolt</option>
+                <option value="Flame Bolt Spellstrike">Flame Bolt Spellstrike</option>
+                <option value="Fortress">Fortress</option>
+                <option value="Fortress Spellstrike">Fortress Spellstrike</option>
+                <option value="Greater Wand <Damage>">Greater Wand <Damage></option>
+                <option value="Harm Undead">Harm Undead</option>
+                <option value="Harm Undead Spellstrike">Harm Undead Spellstrike</option>
+                <option value="Heal Golem">Heal Golem</option>
+                <option value="Help Undead">Help Undead</option>
+                <option value="Help Undead Spellstrike">Help Undead Spellstrike</option>
+                <option value="Ice Blast">Ice Blast</option>
+                <option value="Ice Blast Spellstrike">Ice Blast Spellstrike</option>
+                <option value="Ice Bolt">Ice Bolt</option>
+                <option value="Ice Bolt Spellstrike">Ice Bolt Spellstrike</option>
+                <option value="Ice Storm">Ice Storm</option>
+                <option value="Ice Storm Spellstrike">Ice Storm Spellstrike</option>
+                <option value="Item Recall <Item #>">Item Recall <Item #></option>
+                <option value="Lesser Investment">Lesser Investment</option>
+                <option value="Lesser Investment Spellstrike">Lesser Investment Spellstrike</option>
+                <option value="Life">Life</option>
+                <option value="Life Spellstrike">Life Spellstrike</option>
+                <option value="Light">Light</option>
+                <option value="Light Spellstrike">Light Spellstrike</option>
+                <option value="Lightning Blast">Lightning Blast</option>
+                <option value="Lightning Blast Spellstrike">Lightning Blast Spellstrike</option>
+                <option value="Lightning Bolt">Lightning Bolt</option>
+                <option value="Lightning Bolt Spellstrike">Lightning Bolt Spellstrike</option>
+                <option value="Lightning Storm">Lightning Storm</option>
+                <option value="Lightning Storm Spellstrike">Lightning Storm Spellstrike</option>
+                <option value="Limited Circle of Power <Location>">Limited Circle of Power <Location></option>
+                <option value="Magic Armor">Magic Armor</option>
+                <option value="Magic Armor Spellstrike">Magic Armor Spellstrike</option>
+                <option value="Magic Blade">Magic Blade</option>
+                <option value="Magic Blade Spellstrike">Magic Blade Spellstrike</option>
+                <option value="Magic Storm">Magic Storm</option>
+                <option value="Magic Storm Spellstrike">Magic Storm Spellstrike</option>
+                <option value="Mark  <Description>">Mark  <Description></option>
+                <option value="Master Construct">Master Construct</option>
+                <option value="Obfuscate">Obfuscate</option>
+                <option value="Paralysis">Paralysis</option>
+                <option value="Paralysis Spellstrike">Paralysis Spellstrike</option>
+                <option value="Permanent Circle of Power <Location>">Permanent Circle of Power <Location></option>
+                <option value="Permanent Duration">Permanent Duration</option>
+                <option value="Pin">Pin</option>
+                <option value="Pin Spellstrike">Pin Spellstrike</option>
+                <option value="Planar Asylum <Target> <Plane>">Planar Asylum <Target> <Plane></option>
+                <option value="Poison Shield">Poison Shield</option>
+                <option value="Poison Shield Spellstrike">Poison Shield Spellstrike</option>
+                <option value="Preserve Duration">Preserve Duration</option>
+                <option value="Prison">Prison</option>
+                <option value="Prison Spellstrike">Prison Spellstrike</option>
+                <option value="Protection Aura <Bonus>">Protection Aura <Bonus></option>
+                <option value="Purify">Purify</option>
+                <option value="Purify Spellstrike">Purify Spellstrike</option>
+                <option value="Race Reaver <Race> <Bonus>">Race Reaver <Race> <Bonus></option>
+                <option value="Reflect Magic">Reflect Magic</option>
+                <option value="Reflect Magic Spellstrike">Reflect Magic Spellstrike</option>
+                <option value="Regeneration">Regeneration</option>
+                <option value="Release">Release</option>
+                <option value="Release Spellstrike">Release Spellstrike</option>
+                <option value="Remove Destruction">Remove Destruction</option>
+                <option value="Remove Destruction Spellstrike">Remove Destruction Spellstrike</option>
+                <option value="Remove Paralysis">Remove Paralysis</option>
+                <option value="Remove Paralysis Spellstrike">Remove Paralysis Spellstrike</option>
+                <option value="Remove Silence">Remove Silence</option>
+                <option value="Remove Silence Spellstrike">Remove Silence Spellstrike</option>
+                <option value="Remove Weakness">Remove Weakness</option>
+                <option value="Remove Weakness Spellstrike">Remove Weakness Spellstrike</option>
+                <option value="Render Indestructable">Render Indestructable</option>
+                <option value="Render Indestructable Improved">Render Indestructable Improved</option>
+                <option value="Repel">Repel</option>
+                <option value="Repel Spellstrike">Repel Spellstrike</option>
+                <option value="Resist Destroy Magic">Resist Destroy Magic</option>
+                <option value="Restore">Restore</option>
+                <option value="Restore Spellstrike">Restore Spellstrike</option>
+                <option value="Reverse Life Force <Target>">Reverse Life Force <Target></option>
+                <option value="Sacrifice">Sacrifice</option>
+                <option value="Sanctuary">Sanctuary</option>
+                <option value="Sanctuary Spellstrike">Sanctuary Spellstrike</option>
+                <option value="Shatter">Shatter</option>
+                <option value="Shatter Spellstrike">Shatter Spellstrike</option>
+                <option value="Shield">Shield</option>
+                <option value="Shield Spellstrike">Shield Spellstrike</option>
+                <option value="Shun">Shun</option>
+                <option value="Shun Spellstrike">Shun Spellstrike</option>
+                <option value="Silence">Silence</option>
+                <option value="Silence Spellstrike">Silence Spellstrike</option>
+                <option value="Skill Store Assassinate <Damage>">Skill Store Assassinate <Damage></option>
+                <option value="Skill Store Back Attack">Skill Store Back Attack</option>
+                <option value="Skill Store Critical Attack">Skill Store Critical Attack</option>
+                <option value="Skill Store Disarm">Skill Store Disarm</option>
+                <option value="Skill Store Dodge">Skill Store Dodge</option>
+                <option value="Skill Store Evade">Skill Store Evade</option>
+                <option value="Skill Store Eviscerate">Skill Store Eviscerate</option>
+                <option value="Skill Store Parry">Skill Store Parry</option>
+                <option value="Skill Store Riposte">Skill Store Riposte</option>
+                <option value="Skill Store Shatter">Skill Store Shatter</option>
+                <option value="Skill Store Slay <Damage>">Skill Store Slay <Damage></option>
+                <option value="Skill Store Stun Limb">Skill Store Stun Limb</option>
+                <option value="Skill Store Terminate">Skill Store Terminate</option>
+                <option value="Sleep">Sleep</option>
+                <option value="Sleep Spellstrike">Sleep Spellstrike</option>
+                <option value="Solidify">Solidify</option>
+                <option value="Solidify Spellstrike">Solidify Spellstrike</option>
+                <option value="Spell Parry">Spell Parry</option>
+                <option value="Spell Shield">Spell Shield</option>
+                <option value="Spell Shield  Spellstrike">Spell Shield  Spellstrike</option>
+                <option value="Spell Store <Level>">Spell Store <Level></option>
+                <option value="Spirit Link to <Player # or Item #>">Spirit Link to <Player # or Item #></option>
+                <option value="Spirit Lock to <Player # or Item #>">Spirit Lock to <Player # or Item #></option>
+                <option value="Spirit Recall <Location>">Spirit Recall <Location></option>
+                <option value="Stone Blast">Stone Blast</option>
+                <option value="Stone Blast Spellstrike">Stone Blast Spellstrike</option>
+                <option value="Stone Bolt">Stone Bolt</option>
+                <option value="Stone Bolt Spellstrike">Stone Bolt Spellstrike</option>
+                <option value="Stone Storm">Stone Storm</option>
+                <option value="Stone Storm Spellstrike">Stone Storm Spellstrike</option>
+                <option value="Subjugate">Subjugate</option>
+                <option value="Subjugate Spellstrike">Subjugate Spellstrike</option>
+                <option value="Transform to <Type>">Transform to <Type></option>
+                <option value="Turn Undead">Turn Undead</option>
+                <option value="Turn Undead Spellstrike">Turn Undead Spellstrike</option>
+                <option value="Vengeance <Damage>">Vengeance <Damage></option>
+                <option value="Wall of Force">Wall of Force</option>
+                <option value="Wall of Force Spellstrike">Wall of Force Spellstrike</option>
+                <option value="Ward">Ward</option>
+                <option value="Ward Spellstrike">Ward Spellstrike</option>
+                <option value="Weakness">Weakness</option>
+                <option value="Weakness Spellstrike">Weakness Spellstrike</option>
+                <option value="Web">Web</option>
+                <option value="Web Spellstrike">Web Spellstrike</option>
+                <option value="Wither">Wither</option>
+                <option value="Wither Spellstrike">Wither Spellstrike</option>
+                <option value="Wizard Lock">Wizard Lock</option>
+                <option value="Wizard Lock Spellstrike">Wizard Lock Spellstrike</option>
+              </select>
+              <br />
+              <label>Uses </label><input type="number" ng-model="item.uses" value="item.uses" /><br />
+              <label>Aspect </label><select ng-model="item.aspect">
+                <option value="Celestial" ng-selected="true">Celestial</option>
+                <option value="Earth">Earth</option>
+              </select><br />
+              <label>Type </label><input type="text" ng-model="item.type" value="item.type" /><br />
+              <label>Expiration</label><input type="text" ng-model="item.expiration" value="item.expiration" /><br />
+              <button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
+        <button ng-disabled="user.email !== item.user" class="btn btn-danger" ng-click="delete(item)">Delete</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>

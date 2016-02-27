@@ -11,5 +11,18 @@
       <p>Race: {{value.races}}</p>
       <p>Class: {{value.pcClass}}</p>
     </div>
+    <div ng-repeat="(key, value) in items">
+      <hr />
+      <h2><a href="/item/{{value._id}}">Item</a></h2>
+        <p>Character : {{value.character}}</p>
+        <p>Magic Item ID : {{value.MIID}}</p>
+        <p>Rep ID : {{value.repID}}</p>
+        <p>Item Type : {{value.itemType}}</p>
+        <p>Phys Rep Desc : {{value.physRepDesc}}</p>
+        <p>Restriction : {{value.restriction}}</p>
+        <p>Flaw : {{value.flaw}}</p>
+        <p>Notes : {{value.notes}}</p>
+        <p>Ritual Effect: {{value.ritualEffect}}</p>
+    </div>
   </div>
 </div>

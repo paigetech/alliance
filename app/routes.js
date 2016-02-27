@@ -3,6 +3,7 @@ var User = require('./models/user');  // load the User mongoose model for passpo
 var Character = require('./models/character');
 var Reg = require('./models/registration');
 var Craft = require('./models/craft');
+var Item = require('./models/item');
 
 module.exports = function(app, passport) {
   // api ---------------------------------------------------------------------
@@ -306,11 +307,11 @@ module.exports = function(app, passport) {
                   character : req.body.character,
                   hidden : req.body.hidden,
                   user : req.body.user
-    }, function(err, thing) {
+    }, function(err, reg) {
       if (err) {
         res.send(err);
       }
-      res.json(thing);
+      res.json(reg);
     });
   });
 
@@ -335,6 +336,117 @@ module.exports = function(app, passport) {
         res.send(err);
       }
       res.json(registrations);
+    });
+  });
+  //end registration 
+
+  //begin items
+  app.post('/api/item', function(req, res) {
+    Item.create({
+      user : req.body.user,
+      character : req.body.character,
+      MIID : req.body.MIID,
+      repID : req.body.repID,
+      itemType : req.body.itemType,
+      physRepDesc : req.body.physRepDesc,
+      restriction : req.body.restriction,
+      flaw : req.body.flaw,
+      notes : req.body.notes,
+      ritualEffect : req.body.ritualEffect,
+      uses : req.body.uses,
+      aspect : req.body.aspect,
+      type : req.body.type,
+      expiration : req.body.expiration
+    }, function(err, item) {
+      if (err) {
+        res.send(err);
+      }
+      console.log("Item: " + JSON.stringify(req.body));
+      res.json(item);
+    });
+  });
+
+  // get all items
+  app.get('/api/items', function(req, res) {
+    // use mongoose to get all things from the db
+    Item.find(function(err, items) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(items);
+    });
+  });
+
+  // get item by id
+  app.get('/api/item/:id', function(req, res) {
+    // use mongoose to find the character by id requested
+    Item.findById(req.params.id, function(err, item) {
+      if(err) {
+        res.send(err);
+      } else {
+      res.json(item);
+      }
+    });
+  });
+
+  // update a items by id
+  app.post('/api/item/:id', function(req, res) {
+    Item.findById(req.params.id, function(err, item) {
+      if(err) {
+        res.send(err);
+      }
+
+        if (item) {
+          //update item properties with request
+          user = req.body.user;
+          character = req.body.character;
+          MIID = req.body.MIID;
+          repID = req.body.repID;
+          itemType = req.body.itemType;
+          physRepDesc = req.body.physRepDesc;
+          restriction = req.body.restriction;
+          flaw = req.body.flaw;
+          notes = req.body.notes;
+          ritualEffect = req.body.ritualEffect;
+          uses = req.body.uses;
+          aspect = req.body.aspect;
+          type = req.body.type;
+          expiration = req.body.expiration;
+
+          Item.update({ _id: req.params.id }, build, function (err, affected) {
+                  if (err) {
+                          res.send(err);
+                  }
+                  res.json('affected rows %d', affected);
+          });
+        } else {
+          console.log("no character!");
+        };
+    });
+  });
+
+  // delete a item by id
+  app.delete('/api/item/:id', function(req, res) {
+    Item.remove({
+      _id : req.params.id
+    },
+    function(err, character) {
+      if (err) {
+        res.send(err);
+      }
+      res.send();
+    });
+  });
+  // get item by user
+  app.get('/api/items/:value', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Item.find({ user: req.params.value }, function(err, items) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(items);
     });
   });
 
