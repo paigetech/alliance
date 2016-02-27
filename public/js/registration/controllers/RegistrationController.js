@@ -53,4 +53,12 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     console.log('Error: ' + err);
   });
 
+  $http.get("/api/items/" + $scope.user.email)
+  .success(function (data) {
+    $scope.items = data;
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
+
 }]);

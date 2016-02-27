@@ -7,6 +7,7 @@ var registrationSchema = mongoose.Schema({
   character: {
     type: String
   },
+  item: {},
   body: {
     type: String,
     default: "body"
