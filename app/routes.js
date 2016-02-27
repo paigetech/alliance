@@ -395,12 +395,13 @@ module.exports = function(app, passport) {
   // get item by user
   app.get('/api/items/:value', function(req, res) {
     // use mongoose to get all the things using a paramater
-    Reg.find({ user: req.params.value }, function(err, items) {
+    Item.find({ user: req.params.value }, function(err, items) {
       // if err, send it
       if (err) {
         res.send(err);
       }
-      res.json();
+      res.json(items);
     });
   });
+
 };

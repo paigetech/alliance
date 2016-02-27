@@ -8,7 +8,7 @@
       </div>
       <button ng-click="editor()" class="btn">Toggle Edior</button>
       <div ng-hide="editorEnabled">
-        <p>Character : {{item.character}}</p>
+        <p>Character : {{item.character | characterName: characters}}</p>
         <p>Magic Item ID : {{item.MIID}}</p>
         <p>Rep ID : {{item.repID}}</p>
         <p>Item Type : {{item.itemType}}</p>

@@ -11,9 +11,13 @@
   <form name="itemForm" id="character-form" ng-submit="submit(item)" class="form-left" name="itemForm">
     <div class="multi-form">
       <div class="formgroup">
-        <label>Character </label><select ng-options="character._id as character.characterName for character in characters" ng-model="item.character" value="item.character">
-          <option value="" ng-if="false"></option>
-        </select><br />
+        <label>Character</label>
+      <div class="form-group" ng-repeat="(key, value) in characters">
+        <label>
+          <input type="radio" ng-model="item.character" value="{{value._id}}" > {{value.characterName}}</label>
+      <br />
+
+      </div>
         <label>Magic Item ID </label><input type="text" ng-model="item.MIID" value="item.MIID" /><br />
         <label>Rep ID </label><input type="text" ng-model="item.repID" value="item.repID" /><br />
         <label>Item Type </label><input type="text" ng-model="item.itemType" value="item.itemType" /><br />

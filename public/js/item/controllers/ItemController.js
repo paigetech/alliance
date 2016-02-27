@@ -55,6 +55,7 @@ $scope.user.email = "foo@bar.com";
     console.log('Error: ' + err);
   });
 
+
   //if there is an id present, use the get
   if( $routeParams.id ) {
     $http.get('/api/item/' + $routeParams.id)
