@@ -84,7 +84,7 @@ $scope.user.email = "foo@bar.com";
     $http.post("/api/item/" + $scope.item._id , post)
     .success(function (data, status) {
       // if successfull redirect to /
-      $window.location.href = '/';
+      $window.location.href = '/profile';
     })
     .error(function (data) {
       console.log('Error: ' + data);
@@ -94,6 +94,7 @@ $scope.user.email = "foo@bar.com";
   };
   $scope.delete = function(character) {
     $http.delete("/api/item/" + $scope.item._id);
+    $window.location.href = '/profile';
   };
 
 }]);

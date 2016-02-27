@@ -308,6 +308,7 @@
               <label>Type </label><input type="text" ng-model="item.type" value="item.type" /><br />
               <label>Expiration</label><input type="text" ng-model="item.expiration" value="item.expiration" /><br />
               <button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
+        <button ng-disabled="user.email !== item.user" class="btn btn-danger" ng-click="delete(item)">Delete</button>
             </form>
       </div>
     </div>
