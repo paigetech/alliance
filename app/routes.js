@@ -2,6 +2,7 @@ var Thing = require('./models/thing');  // load the thing mongoose model - chang
 var User = require('./models/user');  // load the User mongoose model for passport.js authentication
 var Character = require('./models/character');
 var Reg = require('./models/registration');
+var Craft = require('./models/craft');
 var Item = require('./models/item');
 
 module.exports = function(app, passport) {
@@ -101,6 +102,51 @@ module.exports = function(app, passport) {
       res.send();
     });
   });
+
+  // craft ---------------------------------------------------------------------
+    // craft routes
+  app.post('/api/craft', function(req, res) {
+    console.log('req body: ' + JSON.stringify(req.body));
+    Craft.create({
+                  user : req.body.user,
+                  name: req.body.name,
+                  totalCost: req.body.totalCost,
+                  scrolls: req.body.scrolls,
+                  potions: req.body.potions,
+                  weapons: req.body.weapons,
+                  alchemyContact: req.body.alchemyContact,
+                  alchemyElixir: req.body.alchemyElixir,
+                  alchemyGas: req.body.alchemyGas,
+                  alchemyWeapon: req.body.alchemyWeapon,
+                  trapsGas: req.body.trapsGas,
+                  trapsNoisemaker: req.body.trapsNoisemaker,
+                  trapsWeapon: req.body.trapsWeapon,
+                  trapsFlameAcid: req.body.trapsFlameAcid,
+                  trapsExplosive: req.body.trapsExplosive,
+                  trapsMechanical: req.body.trapsMechanical,
+                  armor: req.body.armor
+    }, function(err, craft) {
+      if (err) {
+        res.send(err);
+      }
+      res.json(craft);
+    });
+  });
+
+  // get all crafts
+  app.get('/api/crafts', function(req, res) {
+    // use mongoose to get all things from the db
+    Craft.find(function(err, craft) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(craft);
+      console.log("Craft from routes: " + craft);
+    });
+  });
+
+
 
   // process the login form
   // Express Route with passport authentication and custom callback
