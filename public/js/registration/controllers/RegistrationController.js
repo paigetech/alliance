@@ -11,17 +11,14 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     body : '',
     hidden : false,
     user: $scope.user.email,
+    item: {}
   }
   // at save button click
   $scope.submit = function(reg) {
     $scope.submitted = true;
 
     // reg obj we are sending to the server
-    var post = {
-      body : reg.body,
-      user: reg.user,
-      character: reg.character
-    };
+    var post = reg;
 
     $http.post("/api/registration", post)
     .success(function (data, status) {

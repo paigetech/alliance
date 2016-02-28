@@ -259,7 +259,7 @@ module.exports = function(app, passport) {
     Reg.create({
                   body : req.body.body,
                   character : req.body.character,
-                  items: req.body.items,
+                  item: req.body.item,
                   hidden : req.body.hidden,
                   user : req.body.user
     }, function(err, reg) {
