@@ -69,6 +69,14 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'ItemController',
     templateUrl: 'js/item/views/item_id.html'
   })
+  .when('/board', {
+    controller: 'BoardController',
+    templateUrl: 'js/board/views/board.html'
+  })
+  .when('/board/:id', {
+    controller: 'BoardController',
+    templateUrl: 'js/board/views/board_id.html'
+  })
   .otherwise({
     controller: 'HomeController',
     templateUrl: 'js/home/views/home.html'

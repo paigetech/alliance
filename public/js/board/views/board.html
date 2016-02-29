@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+     <h1>Battle Board</h1>
+  <p>Board: {{board.name}}</p>
+    </div>
+    <form name="boardForm" ng-submit="submit(board)">
+      <div class="form-group">
+        <label>Name the Battle Board</label>
+        <input type="text" ng-model="board.name" name="name" placeholder="Name here">
+      </div>
+      <div class="form-group">
+        <hr />
+        <h3>Celestial</h3>
+        <fieldset data-ng-repeat="spell in board.celestial">
+          <select ng-model="spell.name" ng-options="name for name in celestial">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+        </fieldset>
+        <button class="addfields" ng-click="addNewChoice(board.celestial)">Add fields</button>
+      </div>
+      <div class="form-group">
+        <hr />
+        <h3>Earth</h3>
+        <fieldset data-ng-repeat="spell in board.earth">
+          <select ng-model="spell.name" ng-options="name for name in earth">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+        </fieldset>
+        <button class="addfields" ng-click="addNewChoice(board.earth)">Add fields</button>
+      </div>
+      <div class="form-group">
+        <hr />
+        <h3>High Magic</h3>
+        <fieldset data-ng-repeat="spell in board.highMagic">
+          <select ng-model="spell.name" ng-options="name for name in highMagic">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+        </fieldset>
+        <button class="addfields" ng-click="addNewChoice(board.highMagic)">Add fields</button>
+      </div>
+      <span ng-show="showErrorAlert" class="alert">
+        <p>There is an error!</p>
+      </span>
+      <div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

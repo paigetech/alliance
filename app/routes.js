@@ -4,6 +4,7 @@ var Character = require('./models/character');
 var Reg = require('./models/registration');
 var Craft = require('./models/craft');
 var Item = require('./models/item');
+var Board = require('./models/board');
 
 module.exports = function(app, passport) {
   // api ---------------------------------------------------------------------
@@ -450,5 +451,21 @@ module.exports = function(app, passport) {
       res.json(items);
     });
   });
+  //end item
 
+  //begin board
+  app.post('/api/board', function(req, res) {
+    Board.create({
+      user : req.body.user,
+      character : req.body.character,
+      name : req.body.name,
+      spells : req.body.spells,
+    }, function(err, board) {
+      if (err) {
+        res.send(err);
+      }
+      console.log("board: " + JSON.stringify(req.body));
+      res.json(board);
+    });
+  });
 };
