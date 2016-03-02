@@ -459,7 +459,9 @@ module.exports = function(app, passport) {
       user : req.body.user,
       character : req.body.character,
       name : req.body.name,
-      spells : req.body.spells,
+      celestial : req.body.celestial,
+      earth : req.body.earth,
+      highMagic : req.body.highMagic,
     }, function(err, board) {
       if (err) {
         res.send(err);

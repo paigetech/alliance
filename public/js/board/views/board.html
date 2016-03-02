@@ -2,12 +2,18 @@
   <div class="col-xs-6 col-xs-offset-3">
     <div class="page-header">
      <h1>Battle Board</h1>
-  <p>Board: {{board.name}}</p>
     </div>
     <form name="boardForm" ng-submit="submit(board)">
       <div class="form-group">
         <label>Name the Battle Board</label>
         <input type="text" ng-model="board.name" name="name" placeholder="Name here">
+      </div>
+      <div class="form-group">
+        <label>Select a Character</label>
+        <div class="form-group" ng-repeat="(key, value) in characters">
+          <label>
+            <input type="radio" ng-model="board.character" value="{{value._id}}" > {{value.characterName}}</label>
+        <br />
       </div>
       <div class="form-group">
         <hr />
@@ -44,6 +50,7 @@
       </span>
       <div>
       </div>
+  <button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
     </form>
   </div>
 </div>

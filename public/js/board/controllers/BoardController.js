@@ -9,9 +9,9 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
   $scope.board = {
     character : '',
     name: '',
-    celestial : [{name: "", amount: 0}],
-    earth : [{name: "", amount: 0}],
-    highMagic : [{name: "", amount: 0}],
+    celestial : [{name: "1 Disarm", amount: 0}],
+    earth : [{name: "1 Cure Disease/Disease", amount: 0}],
+    highMagic : [{name: "General: Bane <effect group name>", amount: 0}],
     user: $scope.user.email,
   }
   //add spell selection
@@ -36,7 +36,7 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
     $http.post("/api/board", post)
    .success(function (data, status) {
       //if successfull redirect to profile
-      //$window.location.href = '/profile';
+      $window.location.href = '/profile';
     })
     .error(function (data) {
       console.log('Error: ' + data);
@@ -150,5 +150,13 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
   ];
 
   console.log("Board: " + JSON.stringify($scope.board));
+
+  $http.get("/api/characters/" + $scope.user.email)
+  .success(function (data) {
+    $scope.characters = data;
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
 
 }]);
