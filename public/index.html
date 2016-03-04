@@ -5,29 +5,29 @@
     <!-- the following line is needed because the SPA urls would show # characters otherwise. It also needs line 27 in app.js -->
     <base href="/">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <title>Alliance Online</title><!-- Import boostrap and jquery -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <script src=
-      "bower_components/jquery/dist/jquery.js">
-    </script>
-    <script src=
-      "bower_components/bootstrap/dist/js/bootstrap.min.js">
-    </script>
-    <!-- import css -->
-      <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+    <title>Alliance Online</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <!-- Import custom CSS -->
+    <link href="css/stylesheet.css" rel="stylesheet" type="text/css">
+
     <!-- Include the core AngularJS library -->
+    <script src="bower_components/angular/angular.min.js"></script>
 
-    <script src=
-      "bower_components/angular/angular.min.js">
-    </script><!-- Include the AngularJS routing library -->
-
-    <script src=
-      "bower_components/angular-route/angular-route.js">
-    </script>
-    <script src=
-      "bower_components/angular-resource/angular-resource.js">
-    </script>
+    <!-- Include the AngularJS routing library -->
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
 </head>
+
 <body ng-app="alliance" ng-controller="IndexController">
     <!-- navigator and footer and ng-view in the middle -->
     <nav class="navbar navbar-default">
@@ -54,6 +54,8 @@
                     </li>
                     <li>
                         <a href="/craft">Craft</a>
+                    </li>
+                    <li>
                         <a href="/item">Magic Items</a>
                     </li>
                 </ul><!-- right navbar login and signup and logout -->
