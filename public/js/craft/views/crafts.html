@@ -1,2 +1,16 @@
-<h3>ALL THE CRAFTS</h3>
-<p>{{craft}}</p>
+<div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <div class="page-header">
+            <h3>All My Crafts</h3>
+        </div>
+        <pre>{{craft | json}}</pre>
+
+        <span ng-show="showErrorAlert" class="alert">
+        There is an error! {{errorAlert}}
+        </span>
+    </div>
+</div>
+
+
+
+
