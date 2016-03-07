@@ -160,3 +160,12 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
   });
 
 }]);
+
+app.directive('preventDefault', function() {
+  return function(scope, element, attrs) {
+    angular.element(element).bing('click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+  }
+});

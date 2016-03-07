@@ -470,4 +470,16 @@ module.exports = function(app, passport) {
       res.json(board);
     });
   });
+
+  // get all items
+  app.get('/api/boards', function(req, res) {
+    // use mongoose to get all things from the db
+    Item.find(function(err, items) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(boards);
+    });
+  });
 };
