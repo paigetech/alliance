@@ -107,25 +107,7 @@ module.exports = function(app, passport) {
     // craft routes
   app.post('/api/craft', function(req, res) {
     console.log('req body: ' + JSON.stringify(req.body));
-    Craft.create({
-                  user : req.body.user,
-                  name: req.body.name,
-                  totalCost: req.body.totalCost,
-                  scrolls: req.body.scrolls,
-                  potions: req.body.potions,
-                  weapons: req.body.weapons,
-                  alchemyContact: req.body.alchemyContact,
-                  alchemyElixir: req.body.alchemyElixir,
-                  alchemyGas: req.body.alchemyGas,
-                  alchemyWeapon: req.body.alchemyWeapon,
-                  trapsGas: req.body.trapsGas,
-                  trapsNoisemaker: req.body.trapsNoisemaker,
-                  trapsWeapon: req.body.trapsWeapon,
-                  trapsFlameAcid: req.body.trapsFlameAcid,
-                  trapsExplosive: req.body.trapsExplosive,
-                  trapsMechanical: req.body.trapsMechanical,
-                  armor: req.body.armor
-    }, function(err, craft) {
+    Craft.create(req.body, function(err, craft) {
       if (err) {
         res.send(err);
       }
