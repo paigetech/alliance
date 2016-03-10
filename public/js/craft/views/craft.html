@@ -3,291 +3,397 @@
         <div class="page-header">
             <h1>Production Calculator</h1>
         </div>
-        <!--TODO add labels or titles to inputs-->
         <form name="craftForm">
-            <h2>Total Cost: {{ craft.totalCost }}</h2>
             <div class="form-group">
-
-                <label> Name for this set of skills:
-                    <input class="form-control"
+                <label for="craft-name"> Name for this set of skills: </label>
+                <input class="form-control"
+                       id="craft-name"
                        value="{{ craft.name }}"
                        ng-model="craft.name">
-                </label>
 
-                <div>
-                    <!--SCROLLS-->
-                    <div>
-                        <h3>Scrolls</h3>
+                <h2 class="total-cost">Total Cost:
+                    <span>{{ craft.totalCost }}</span></h2>
 
-                        <table>
-                            <tr>
-                                <th>Scroll</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="scroll in craft.scrolls">
-                                <td>{{ scroll.name }}</td>
-                                <td>{{ scroll.cost }}</td>
-                                <td><input class="form-control" type="number"
-                                           value="{{ scroll.amount }}" min="0"
-                                           ng-model="scroll.amount"
-                                           title="scroll amount"></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!--POTIONS-->
-                    <div>
-                        <h2>Potions</h2>
-                        <table>
-                            <tr>
-                                <th>Potion</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="potion in craft.potions">
-                                <td>{{ potion.name }}</td>
-                                <td>{{ potion.cost }}</td>
-                                <td><input type="number" value="{{ potion.amount }}"
-                                           min="0"
-                                           ng-model="potion.amount"
-                                           title="potion amount"></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!--WEAPONS-->
-                    <div>
-                        <h2>Weapons</h2>
-                        <table>
-                            <tr>
-                                <th>Weapon</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="weapon in craft.weapons">
-                                <td>{{ weapon.name }}</td>
-                                <td>{{ weapon.cost }}</td>
-                                <td><input type="number" value="{{ weapon.amount }}"
-                                           min="0"
-                                           ng-model="weapon.amount"
-                                           title="weapon amount">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!--ALCHEMY-->
-                    <div>
-                        <h2>Alchemy</h2>
-                        <h3>Alchemy: Contact</h3>
-                        <table>
-                            <tr>
-                                <th>Contact</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="contact in craft.alchemyContact">
-                                <td>{{ contact.name }}</td>
-                                <td>{{ contact.cost }}</td>
-                                <td><input type="number" value="{{ contact.amount }}"
-                                           min="0"
-                                           ng-model="contact.amount"
-                                           title="alchemy contact amount">
-                                </td>
-                            </tr>
-                        </table>
+                <!--SCROLLS-->
+                <h2>Scrolls</h2>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="scroll in craft.scrolls"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            scroll.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ scroll.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ scroll.amount }}"
+                                   min="0"
+                                   ng-model="scroll.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Alchemy: Elixir</h3>
-                        <table>
-                            <tr>
-                                <th>Elixir</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="elixir in craft.alchemyElixir ">
-                                <td>{{ elixir.name }}</td>
-                                <td>{{ elixir.cost }}</td>
-                                <td><input type="number" value="{{ elixir.amount }}"
-                                           min="0"
-                                           ng-model="elixir.amount"
-                                           title="alchemy elixir amount">
-                                </td>
-                            </tr>
-                        </table>
 
-                        <h3>Alchemy: Gas</h3>
-                        <table>
-                            <tr>
-                                <th>Gas</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="gas in craft.alchemyGas">
-                                <td>{{ gas.name }}</td>
-                                <td>{{ gas.cost }}</td>
-                                <td><input type="number" value="{{ gas.amount }}" min="0"
-                                           ng-model="gas.amount"
-                                           title="alchemy gas amount">
-                                </td>
-                            </tr>
-                        </table>
+                <!--POTIONS-->
+                <h2>Potions</h2>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="potion in craft.potions"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            potion.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ potion.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ potion.amount }}"
+                                   min="0"
+                                   ng-model="potion.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+                <!--WEAPONS-->
+                <h2>Weapons</h2>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="weapon in craft.weapons"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            weapon.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ weapon.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ weapon.amount }}"
+                                   min="0"
+                                   ng-model="weapon.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+                <!--ALCHEMY-->
+                <h2>Alchemy</h2>
+                <h3>Alchemy: Contact</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="contact in craft.alchemyContact"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            contact.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ contact.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ contact.amount }}"
+                                   min="0"
+                                   ng-model="contact.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Alchemy: Weapon</h3>
-                        <table>
-                            <tr>
-                                <th>Weapon</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="weapon in craft.alchemyWeapon">
-                                <td>{{ weapon.name }}</td>
-                                <td>{{ weapon.cost }}</td>
-                                <td><input type="number" value="{{ weapon.amount }}"
-                                           min="0"
-                                           ng-model="weapon.amount"
-                                           title="alchemy weapon amount">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- TRAPS-->
-                    <div>
-                        <h2>Traps</h2>
-                        <h3>Traps: Gas</h3>
-                        <table>
-                            <tr>
-                                <th>Gas</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="gas in craft.trapsGas">
-                                <td>{{ gas.name }}</td>
-                                <td>{{ gas.cost }}</td>
-                                <td><input type="number" value="{{ gas.amount }}" min="0"
-                                           ng-model="gas.amount" title="gas trap amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h3>Alchemy: Elixir</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="elixir in craft.alchemyElixir"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            elixir.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ elixir.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ elixir.amount }}"
+                                   min="0"
+                                   ng-model="elixir.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Traps: Noisemaker</h3>
-                        <table>
-                            <tr>
-                                <th>Noisemaker</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="noisemaker in craft.trapsNoisemaker ">
-                                <td>{{ noisemaker.name }}</td>
-                                <td>{{ noisemaker.cost }}</td>
-                                <td><input type="number" value="{{ noisemaker.amount }}"
-                                           min="0"
-                                           ng-model="noisemaker.amount"
-                                           title="noisemaker trap amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h3>Alchemy: Gas</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="gas in craft.alchemyGas"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            gas.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ gas.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ gas.amount }}"
+                                   min="0"
+                                   ng-model="gas.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Traps: Weapon</h3>
-                        <table>
-                            <tr>
-                                <th>Weapon</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="weapon in craft.trapsWeapon">
-                                <td>{{ weapon.name }}</td>
-                                <td>{{ weapon.cost }}</td>
-                                <td><input type="number" value="{{ weapon.amount }}"
-                                           min="0"
-                                           ng-model="weapon.amount"
-                                           title="traps weapon amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h3>Alchemy: Weapon</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="weapon in craft.alchemyWeapon"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            weapon.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ weapon.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ weapon.amount }}"
+                                   min="0"
+                                   ng-model="weapon.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+                <!-- TRAPS-->
 
-                        <h3>Traps: Flame/Acid</h3>
-                        <table>
-                            <tr>
-                                <th>Contact</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="contact in craft.trapsFlameAcid">
-                                <td>{{ contact.name }}</td>
-                                <td>{{ contact.cost }}</td>
-                                <td><input type="number" value="{{ contact.amount }}"
-                                           min="0"
-                                           ng-model="contact.amount"
-                                           title="Flame/Acid trap amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h2>Traps</h2>
+                <h3>Traps: Gas</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsGas"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Traps: Explosive</h3>
-                        <table>
-                            <tr>
-                                <th>Explosive</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="explosive in craft.trapsExplosive">
-                                <td>{{ explosive.name }}</td>
-                                <td>{{ explosive.cost }}</td>
-                                <td><input type="number" value="{{ explosive.amount }}"
-                                           min="0"
-                                           ng-model="explosive.amount"
-                                           title="explosive trap amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h3>Traps: Noisemaker</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsNoisemaker"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <h3>Traps: Mechanical</h3>
-                        <table>
-                            <tr>
-                                <th>Mechanical</th>
-                                <th>Cost</th>
-                                <th>Quantity</th>
-                            </tr>
-                            <tr ng-repeat="trap in craft.trapsMechanical">
-                                <td>{{ trap.name }}</td>
-                                <td>{{ trap.cost }}</td>
-                                <td><input type="number" value="{{ trap.amount }}" min="0"
-                                           ng-model="trap.amount"
-                                           title="mechanical trap amount">
-                                </td>
-                            </tr>
-                        </table>
+                <h3>Traps: Weapon</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsWeapon"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
 
-                        <div>
-                            <h2>Armor</h2>
-                            <table>
-                                <tr>
-                                    <th>Armor Set</th>
-                                    <th>Cost</th>
-                                    <th>Quantity</th>
-                                </tr>
-                                <tr ng-repeat="armorSet in craft.armor">
-                                    <td>{{ armorSet.name }}</td>
-                                    <td>{{ armorSet.cost }}</td>
-                                    <td><input type="number" value="{{ armorSet.amount }}"
-                                               min="0"
-                                               ng-model="armorSet.amount"
-                                               title="armor set amount"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <h3>Traps: Flame/Acid</h3>
+                <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsFlameAcid"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+
+                <h2>Traps: Explosive</h2>
+                 <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsExplosive"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+
+                <h2>Traps: Mechanical</h2>
+                                <ul class="production-ul container-fluid">
+                    <li ng-repeat="trap in craft.trapsMechanical"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            trap.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ trap.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ trap.amount }}"
+                                   min="0"
+                                   ng-model="trap.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+                <h2>Armor</h2>
+                                    <ul class="production-ul container-fluid">
+                    <li ng-repeat="armorSet in craft.armor"
+                        class="row production-li">
+                        <span
+                            class="col-xs-12 col-sm-4 col-md-4 craft-name"><strong>{{
+                            armorSet.name
+                            }}</strong>
+                        </span>
+                        <span class="col-xs-12 col-sm-4 col-md-4"><strong>Cost:
+                        </strong>
+                            {{ armorSet.cost }}
+                        </span>
+                        <span class="col-xs-2 col-sm-4 col-md-4">
+                           <label>
+                               <input
+                                   class="form-control production-form-input"
+                                   type="number"
+                                   value="{{ armorSet.amount }}"
+                                   min="0"
+                                   ng-model="armorSet.amount">
+                           </label>
+                        </span>
+                    </li>
+                </ul>
+    </div>
 
         <span ng-show="showErrorAlert" class="alert">
         There is an error! {{errorAlert}}
       </span>
-            <div>
-                <button ng-disabled="craftForm.$invalid || submitted"
-                        class="btn btn-lg btn-success" type="submit">Save
-                </button>
-            </div>
-        </form>
+    <div>
+        <button ng-disabled="craftForm.$invalid || submitted"
+                class="btn btn-lg btn-success" type="submit">Save
+        </button>
     </div>
+    </form>
+</div>
 </div>
 
 

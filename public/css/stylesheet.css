@@ -47,3 +47,31 @@ body {
   color: red;
   border: solid 1px red;
 }
+
+
+/*form styles*/
+
+.total-cost {
+  text-align: center;
+}
+.production-ul {
+  font-size: larger;
+  list-style-type: none;
+  padding: 0;
+}
+.production-li {
+  margin: 1em;
+  min-width: 200px;
+  padding: 0.25em 0 0 0;
+}
+.production-form-input {
+  padding-left: 1.5em;
+  margin-top: .025em;
+  width: 4em;
+}
+
+.craft-name {
+  background: paleturquoise;
+}
+
+
