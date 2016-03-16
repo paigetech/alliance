@@ -24,7 +24,7 @@
           <input type="number" ng-model="spell.amount" name="" placeholder="0">
         </fieldset>
         <button type="button" class="addfields" ng-click="addNewChoice(board.celestial)">Add field</button>
-        <button tyep="button" class="subtractfields" ng-click="removeChoice(board.celestial)">remove field</button>
+        <button type="button" class="subtractfields" ng-click="removeChoice(board.celestial)">remove field</button>
       </div>
       <div class="form-group">
         <hr />
@@ -44,6 +44,8 @@
           <select ng-model="spell.name" ng-options="name for name in highMagic">
           </select>
           <input type="number" ng-model="spell.amount" name="" placeholder="0">
+          <!-- ifs for clarifying details -->
+            <input ng-if="spell.name === 'General: Bane <effect group name>' || spell.name === 'General: Cloak <effect group name>'" type="text" ng-model="spell.group" name="" placeholder="Effect Group Name">
         </fieldset>
         <button type="button" class="addfields" ng-click="addNewChoice(board.highMagic)">Add fields</button>
         <button type="button" class="subtractfields" ng-click="removeChoice(board.highMagic)">remove field</button>

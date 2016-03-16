@@ -11,8 +11,8 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
     name: '',
     celestial : [{name: "1 Disarm", amount: 0}],
     earth : [{name: "1 Cure Disease/Disease", amount: 0}],
-    highMagic : [{name: "General: Bane <effect group name>", amount: 0}],
-    user: $scope.user.email,
+    highMagic : [{name: "General: Bane <effect group name>", amount: 0, group: "Gift"}],
+    user: $scope.user.email
   }
   //add spell selection
   $scope.addNewChoice = function(theArray) {

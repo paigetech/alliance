@@ -453,10 +453,21 @@ module.exports = function(app, passport) {
     });
   });
 
-  // get all items
+  // get all boards
   app.get('/api/boards', function(req, res) {
     // use mongoose to get all things from the db
-    Item.find(function(err, items) {
+    Board.find(function(err, items) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(boards);
+    });
+  });
+  // get boards by user
+  app.get('/api/boards/:value', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Board.find({ user: req.params.value }, function(err, boards) {
       // if err, send it
       if (err) {
         res.send(err);

@@ -25,5 +25,14 @@ app.controller('ProfileController', ['$scope', '$http', '$window', function($sco
     console.log('Error: ' + err);
   });
 
+  $http.get("/api/boards/" + $scope.user.email)
+  .success(function (data) {
+    $scope.boards = data;
+    console.log(JSON.stringify(data));
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
+
 
 }]);

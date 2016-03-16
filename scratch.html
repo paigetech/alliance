@@ -1,0 +1,13 @@
+
+        <p>Character : {{value.character}}</p>
+        <p>Name : {{value.name}}</p>
+        <div ng-repeat="spell in value.earth">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}}</p>
+        </div>
+        <div ng-repeat="spell in value.celestial">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}}</p>
+        </div>
+        <div ng-repeat="spell in value.highmagic">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}} <span ng-if="spell.group"> Group: {{spell.group}}</p>
+        </div>
+        <!-- getting ng-repeate dupes error -->
