@@ -1,3 +1,7 @@
+body {
+  padding-bottom: 4em;
+}
+
 /* nav bar */
 .logo {
   font-size: 200%;
@@ -42,3 +46,21 @@
   color: red;
   border: solid 1px red;
 }
+
+/*craft styles*/
+
+.production-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.production-form-input {
+  padding-left: 1.5em;
+  width: 4em;
+}
+
+.craft-name {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+

@@ -266,6 +266,15 @@ app.controller('CraftController', ['$scope', '$http', '$window', function($scope
     });
   };
 
+
+  $http.get("/api/crafts")
+  .success(function (data) {
+    $scope.crafts = data;
+    console.log("Craft: " + data);
+  })
+  .error(function (err) {
+    console.log('Error: ' + err);
+  });
 }]);
 
 function calculateCost(objectWatched) {
