@@ -159,6 +159,24 @@ app.controller('BoardController', ['$scope', '$http', '$window', function($scope
     console.log('Error: ' + err);
   });
 
+  //if there is an id present, get the single board
+  if( $routeParams.id ) {
+    $http.get('/api/board/' + $routeParams.id)
+    .success(function (data) {
+      if(data === null) {
+        console.log("Data Null: " + data);
+        $scope.showErrorAlert = true;
+        $scope.errorAlert = "No Battle board for that ID";
+
+      } else {
+        $scope.board = data;
+      }
+    })
+    .error(function (err) {
+      console.log('Error: ' + err);
+    });
+  };
+
 }]);
 
 app.directive('preventDefault', function() {

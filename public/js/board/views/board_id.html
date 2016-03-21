@@ -1,38 +1,88 @@
-<h3>A Thing</h3>
-<p>{{thing}}</p>
+<h3>Battle Board</h3>
+<p>{{board}}</p>
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <div class="page-header">
-     <h1>Thing</h1>
-     <p>User: {{user}}</p>
+     <h1>Battle Board</h1>
     </div>
     <button ng-click="editor()" class="btn">Toggle Edior</button>
     <div ng-hide="editorEnabled">
-      <p>Thing: {{thing}}</p>
+        <p>Character : {{board.character}}</p>
+        <p>Name : {{board.name}}</p>
+        <h3 ng-if="board.earth">Earth</h3>
+        <div ng-repeat="spell in board.earth">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}}</p>
+        </div>
+        <h3 ng-if="board.celestial">Celestial</h3>
+        <div ng-repeat="spell in board.celestial">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}}</p>
+        </div>
+        <h3 ng-if="board.highMagic">High Magic</h3>
+        <div ng-repeat="spell in board.highMagic">
+          <p>Name: {{spell.name}} Amount: {{spell.amount}} <span ng-if="spell.group">Group: {{spell.group}}</span></p>
+        </div>
     </div>
     <div ng-show="editorEnabled">
-      <form name="thingForm" ng-submit="submit(thing)">
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" class="form-control" name="title" placeholder="Write a title?" ng-model="thing.title" required>
-        </div>
-        <div class="form-group">
-          <label>Author</label>
-          <input type="text" class="form-control" name="Author" placeholder="{{user.email}}" ng-model="thing.author" required>
-        </div>
-        <div class="form-group">
-          <label>Body</label>
-          <input type="text" class="form-control" name="Body" placeholder="Write about stuff?" ng-model="thing.body" required>
-        </div>
-        <span ng-show="showErrorAlert" class="alert">
-          <p>Here is an alert!</p>
-        </span>
-        <div>
-          <button ng-disabled="thingForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Update</button>
-        <button ng-disabled="user.email !== thing.user" class="btn btn-lg btn-success" ng-click="delete(thing)">Delete</button>
-        </div>
-      </form>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="page-header">
+     <h1>Battle Board</h1>
     </div>
+    <form name="boardForm" ng-submit="submit(board)">
+      <div class="form-group">
+        <label>Name the Battle Board</label>
+        <input type="text" ng-model="board.name" name="name" placeholder="Name here" required>
+      </div>
+      <div class="form-group">
+        <label>Select a Character</label>
+        <div class="form-group" ng-repeat="(key, value) in characters">
+          <label>
+            <input type="radio" ng-model="board.character" value="{{value._id}}" > {{value.characterName}}</label>
+        <br />
+      </div>
+      <div class="form-group">
+        <hr />
+        <h4>Celestial</h4>
+        <fieldset data-ng-repeat="spell in board.celestial">
+          <select ng-model="spell.name" ng-options="name for name in celestial">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+        </fieldset>
+        <button type="button" class="addfields" ng-click="addNewChoice(board.celestial)">Add field</button>
+        <button type="button" class="subtractfields" ng-click="removeChoice(board.celestial)">remove field</button>
+      </div>
+      <div class="form-group">
+        <hr />
+        <h4>Earth</h4>
+        <fieldset data-ng-repeat="spell in board.earth">
+          <select ng-model="spell.name" ng-options="name for name in earth">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+        </fieldset>
+        <button type="button" class="addfields" ng-click="addNewChoice(board.earth)">Add fields</button>
+        <button type="button" class="subtractfields" ng-click="removeChoice(board.earth)">remove field</button>
+      </div>
+      <div class="form-group">
+        <hr />
+        <h4>High Magic</h4>
+        <fieldset data-ng-repeat="spell in board.highMagic">
+          <select ng-model="spell.name" ng-options="name for name in highMagic">
+          </select>
+          <input type="number" ng-model="spell.amount" name="" placeholder="0">
+          <!-- ifs for clarifying details -->
+            <input ng-if="spell.name === 'General: Bane <effect group name>' || spell.name === 'General: Cloak <effect group name>'" type="text" ng-model="spell.group" name="" placeholder="Effect Group Name">
+        </fieldset>
+        <button type="button" class="addfields" ng-click="addNewChoice(board.highMagic)">Add fields</button>
+        <button type="button" class="subtractfields" ng-click="removeChoice(board.highMagic)">remove field</button>
+      </div>
+      <span ng-show="showErrorAlert" class="alert">
+        <p>There is an error!</p>
+      </span>
+      <div>
+      </div>
+  <button type="submit" class="btn btn-primary" ng-disabled="formInvalid" ng-class="{'btn-danger': formInvalid}">Submit </button>
+    </form>
   </div>
+</div>
 </div>
 </div>
