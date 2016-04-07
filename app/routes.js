@@ -475,4 +475,16 @@ module.exports = function(app, passport) {
       res.json(boards);
     });
   });
+
+  // get board by id
+  app.get('/api/board/:id', function(req, res) {
+    // use mongoose to find the character by id requested
+    Board.findById(req.params.id, function(err, board) {
+      if(err) {
+        res.send(err);
+      } else {
+      res.json(board);
+      }
+    });
+  });
 };

@@ -1,11 +1,24 @@
-app.controller('BoardController', ['$scope', '$http', '$window', function($scope, $http, $window) {
+app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams', 'Character' function($scope, $http, $window, $routeParams, Character) {
 
   // booleans to show/hide alerts
   $scope.submitted = false;
   $scope.showErrorAlert = false;
   // alert string
   $scope.errorAlert = '';
-  // thing model for our view
+  //editor enable
+  $scope.editorEnabled = false;
+
+  $scope.editor = function() {
+    if ($scope.editorEnabled === true) {
+      $scope.editorEnabled = false;
+    } else if ($scope.editorEnabled === false) {
+      $scope.editorEnabled = true;
+    }
+  }
+  $scope.disableEditor = function() {
+    $scope.editorEnabled = false;
+  }
+  
   $scope.board = {
     character : '',
     name: '',
