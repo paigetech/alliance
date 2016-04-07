@@ -6,7 +6,7 @@
     </div>
     <button ng-click="editor()" class="btn">Toggle Edior</button>
     <div ng-hide="editorEnabled">
-        <p>Character : {{board.character}}</p>
+        <p>Character : {{board.character | characterName: characters}}</p>
         <p>Name : {{board.name}}</p>
         <h3 ng-if="board.earth">Earth</h3>
         <div ng-repeat="spell in board.earth">

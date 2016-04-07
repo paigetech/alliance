@@ -1,4 +1,4 @@
-app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams', 'Character' function($scope, $http, $window, $routeParams, Character) {
+app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams', 'Character', function($scope, $http, $window, $routeParams, Character) {
 
   // booleans to show/hide alerts
   $scope.submitted = false;
