@@ -499,4 +499,31 @@ module.exports = function(app, passport) {
       }
     });
   });
+  // update a board by id
+  app.post('/api/item/:id', function(req, res) {
+    Board.findById(req.params.id, function(err, board) {
+      if(err) {
+        res.send(err);
+      }
+
+        if (board) {
+          //update item properties with request
+          user = req.body.user;
+          character = req.body.character;
+          name = req.body.name;
+          celestial = req.body.celestial;
+          earth = req.body.earth;
+          highMagic = req.body.highMagic;
+
+          Board.update({ _id: req.params.id }, build, function (err, affected) {
+                  if (err) {
+                          res.send(err);
+                  }
+                  res.json('affected rows %d', affected);
+          });
+        } else {
+          console.log("no board!");
+        };
+    });
+  });
 };

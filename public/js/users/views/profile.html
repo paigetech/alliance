@@ -14,7 +14,7 @@
     <div ng-repeat="(key, value) in items">
       <hr />
       <h2><a href="/item/{{value._id}}">Item</a></h2>
-        <p>Character : {{value.character}}</p>
+        <p>Character : {{value.character | characterName: characters}}</p>
         <p>Magic Item ID : {{value.MIID}}</p>
         <p>Rep ID : {{value.repID}}</p>
         <p>Item Type : {{value.itemType}}</p>
@@ -27,7 +27,7 @@
     <div ng-repeat="(key, value) in boards">
       <hr />
       <h2><a href="/board/{{value._id}}">Battle Board</a></h2>
-        <p>Character : {{value.character}}</p>
+        <p>Character : {{value.character | characterName: characters}}</p>
         <p>Name : {{value.name}}</p>
         <h3 ng-if="value.earth">Earth</h3>
         <div ng-repeat="spell in value.earth">

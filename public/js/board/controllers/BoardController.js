@@ -18,7 +18,7 @@ app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams',
   $scope.disableEditor = function() {
     $scope.editorEnabled = false;
   }
-  
+
   $scope.board = {
     character : '',
     name: '',
@@ -52,6 +52,25 @@ app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams',
       $window.location.href = '/profile';
     })
     .error(function (data) {
+      console.log('Error: ' + data);
+      $scope.showErrorAlert = true;
+      $scope.errorAlert = data[0];
+    });
+  };
+  //update
+  $scope.save = function(board) {
+    $scope.submitted = true;
+
+    // thing obj we are sending to the server
+    var post = board;
+    console.log("the post: " + JSON.stringify(post));
+
+    $http.post('/api/board/' + $routeParams.id)
+   .success(fun'/api/board/' + $routeParams.id, function (data, status) {
+      //if succ'/api/board/' + $routeParams.idessfull redirect to profile
+      $window.l'/api/board/' + $routeParams.idocation.href = '/profile';
+    })
+    .error(func'/api/board/' + $routeParams.idtion (data) {
       console.log('Error: ' + data);
       $scope.showErrorAlert = true;
       $scope.errorAlert = data[0];
