@@ -19,12 +19,14 @@ app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams',
     $scope.editorEnabled = false;
   }
 
+  
   $scope.board = {
     character : '',
     name: '',
     celestial : [{name: "1 Disarm", amount: 0}],
     earth : [{name: "1 Cure Disease/Disease", amount: 0}],
     highMagic : [{name: "General: Bane <effect group name>", amount: 0, group: "Gift"}],
+    //add groups as selection this should probably be a global
     user: $scope.user.email
   }
   //add spell selection
@@ -65,12 +67,12 @@ app.controller('BoardController', ['$scope', '$http', '$window', '$routeParams',
     var post = board;
     console.log("the post: " + JSON.stringify(post));
 
-    $http.post('/api/board/' + $routeParams.id)
-   .success(fun'/api/board/' + $routeParams.id, function (data, status) {
+    $http.post('/api/board/' + $routeParams.id + post)
+    .success(function (data, status) {
       //if succ'/api/board/' + $routeParams.idessfull redirect to profile
-      $window.l'/api/board/' + $routeParams.idocation.href = '/profile';
+      $window.location.href = '/profile';
     })
-    .error(func'/api/board/' + $routeParams.idtion (data) {
+    .error('/api/board/' + $routeParams, function (data) {
       console.log('Error: ' + data);
       $scope.showErrorAlert = true;
       $scope.errorAlert = data[0];
