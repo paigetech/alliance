@@ -11,8 +11,11 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     body : '',
     hidden : false,
     user: $scope.user.email,
-    item: {}
-  }
+    item: {},
+    board:''
+  };
+  $scope.boards = '';
+  $scope.items = '';
   // at save button click
   $scope.submit = function(reg) {
     $scope.submitted = true;
@@ -33,14 +36,6 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     });
   };
 
-  $http.get("/api/registrations/" + $scope.user.email)
-  .success(function (data) {
-    $scope.regs = data;
-    console.log("reg: " + data);
-  })
-  .error(function (err) {
-    console.log('Error: ' + err);
-  });
 
   $http.get("/api/characters/" + $scope.user.email)
   .success(function (data) {
@@ -50,12 +45,36 @@ app.controller('RegistrationController', ['$scope', '$http', '$window', function
     console.log('Error: ' + err);
   });
 
-  $http.get("/api/items/" + $scope.user.email)
-  .success(function (data) {
-    $scope.items = data;
-  })
-  .error(function (err) {
-    console.log('Error: ' + err);
-  });
+//fetch after character assigned?
+     function getCharacterThings(character){
+        $http.get("/api/items/character/" + character)
+        .success(function (data) {
+            if(data) {
+                $scope.items = data;
+            } else {
+                $scope.items = '';
+            }
+        })
+        .error(function (err) {
+            console.log('Error: ' + err);
+        });
+
+        $http.get("/api/boards/character/" + character)
+        .success(function (data) {
+            if(data) {
+                $scope.boards = data;
+            } else {
+                $scope.boards = '';
+            }
+        })
+        .error(function (err) {
+            console.log('Error: ' + err);
+        });
+    }
+
+    $scope.$watch('reg.character', function(newValue, oldValue) {
+        getCharacterThings(newValue);
+    });
+
 
 }]);

@@ -18,15 +18,23 @@
           <input type="radio" ng-model="reg.character" value="{{value._id}}" > {{value.characterName}}</label>
       <br />
       </div>
-      <div class="form-group">
-      <label>Select your Magic Items</label><br />
-      <div class="form-group" ng-repeat="(key, value) in items">
-        <label>
-          <input type="checkbox" ng-model="reg.item[$index]" ng-true-value="'{{value._id}}'" checkbox-group/> {{value.MIID}}</label>
-      <br />
-      </div>
-      <div>
-        <button ng-disabled="thingForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Save</button>
+      <div ng-show="reg.character != ''">
+        <label ng-show="boards != ''">Select a Battle Board</label>
+        <div class="form-group" ng-repeat="(key, value) in boards" >
+            <label>
+                <input type="radio" ng-model="reg.board" value="{{value._id}}" > {{value.name}}</label>
+        <br />
+        </div>
+
+        <label ng-show="items != ''">Select your Magic Items</label><br />
+        <div class="form-group" ng-repeat="(key, value) in items">
+            <label>
+            <input type="checkbox" ng-model="reg.item[$index]" ng-true-value="'{{value._id}}'" checkbox-group/> {{value.MIID}}</label>
+        <br />
+        </div>
+        <div>
+            <button ng-disabled="thingForm.$invalid || submitted" class="btn btn-lg btn-success" type="submit">Save</button>
+        </div>
       </div>
     </form>
   </div>

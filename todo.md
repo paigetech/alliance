@@ -11,3 +11,4 @@ on MI's change expiration to a date picker
 
 - be patient for all character stuff
 - check MI's for unique Item Number Per character. (player?)
+- change character names to id most places

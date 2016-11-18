@@ -406,7 +406,7 @@ module.exports = function(app, passport) {
           });
         } else {
           console.log("no character!");
-        };
+        }
     });
   });
 
@@ -426,6 +426,18 @@ module.exports = function(app, passport) {
   app.get('/api/items/:value', function(req, res) {
     // use mongoose to get all the things using a paramater
     Item.find({ user: req.params.value }, function(err, items) {
+      // if err, send it
+      if (err) {
+        res.send(err);
+      }
+      res.json(items);
+    });
+  });
+
+  // get item by user
+  app.get('/api/items/character/:character_id', function(req, res) {
+    // use mongoose to get all the things using a paramater
+    Item.find({ character: req.params.character_id}, function(err, items) {
       // if err, send it
       if (err) {
         res.send(err);
@@ -465,20 +477,20 @@ module.exports = function(app, passport) {
     });
   });
   // get boards by user
-  app.get('/api/boards/:value', function(req, res) {
+  app.get('/api/boards/:user', function(req, res) {
     // use mongoose to get all the things using a paramater
-    Board.find({ user: req.params.value }, function(err, boards) {
+    Board.find({ user: req.params.user }, function(err, boards) {
       // if err, send it
       if (err) {
         res.send(err);
       }
+        console.log('boards', boards);
       res.json(boards);
     });
   });
 
   // get board by id
   app.get('/api/board/:id', function(req, res) {
-    // use mongoose to find the character by id requested
     Board.findById(req.params.id, function(err, board) {
       if(err) {
         res.send(err);
@@ -488,15 +500,15 @@ module.exports = function(app, passport) {
     });
   });
 
-  // get board by id
-  app.get('/api/board/:id', function(req, res) {
-    // use mongoose to find the character by id requested
-    Board.findById(req.params.id, function(err, board) {
-      if(err) {
+  // get boards by character 
+  app.get('/api/boards/character/:character', function(req, res) {
+    Board.find({ character : req.params.character }, function(err, boards) {
+      // if err, send it
+      if (err) {
         res.send(err);
-      } else {
-      res.json(board);
       }
+        console.log('boards', boards);
+      res.json(boards);
     });
   });
   // update a board by id
