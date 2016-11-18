@@ -8,6 +8,10 @@ node_modules/
 
 # Folder mongo database
 data/
+data/db/
+.turtle
+.wt
+data/diagnostic.data/
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
