@@ -1,11 +1,8 @@
-/*! angular-flash - v2.2.0 - 2016-02-10
+/*! angular-flash - v2.2.7 - 2016-03-31
 * https://github.com/sachinchoolur/angular-flash
 * Copyright (c) 2016 Sachin; Licensed MIT */
-'use strict';
 
-/*! angular-flash - v2.2.0 - 2016-02-06
- * https://github.com/sachinchoolur/angular-flash
- * Copyright (c) 2016 Sachin; Licensed MIT */
+'use strict';
 
 var app = angular.module('ngFlash', []);
 
@@ -46,7 +43,7 @@ app.directive('flashMessage', ['Flash', function (Flash) {
             showClose: '=',
             onDismiss: '&'
         },
-        template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div></div>',
+        template: '<div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div>',
         link: function link(scope, ele, attrs) {
             Flash.setDefaultTimeout(scope.duration);
             Flash.setShowClose(scope.showClose);
@@ -78,8 +75,8 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
         dataFactory.onDismiss = callback;
     };
     dataFactory.create = function (type, text, timeout, config, showClose) {
-        var $this = undefined,
-            flash = undefined;
+        var $this = void 0,
+            flash = void 0;
         $this = this;
         flash = {
             type: type,
@@ -95,9 +92,9 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
         }
         $rootScope.flashes.push(flash);
         if (flash.timeout) {
-            flash.timeoutObj = $timeout(function (id) {
-                $this.dismiss(id);
-            }, flash.timeout, true, flash.id);
+            flash.timeoutObj = $timeout(function () {
+                $this.dismiss(flash.id);
+            }, flash.timeout);
         }
         return flash.id;
     };
@@ -112,7 +109,6 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
             var flash = $rootScope.flashes[index];
             dataFactory.pause(index);
             $rootScope.flashes.splice(index, 1);
-            $rootScope.$digest();
             if (typeof dataFactory.onDismiss === 'function') {
                 dataFactory.onDismiss(flash);
             }
@@ -125,9 +121,9 @@ app.factory('Flash', ['$rootScope', '$timeout', function ($rootScope, $timeout) 
     };
     dataFactory.reset = dataFactory.clear;
     function findIndexById(id) {
-        return $rootScope.flashes.findIndex(function (flash) {
-            return flash.id === id;
-        });
+        return $rootScope.flashes.map(function (flash) {
+            return flash.id;
+        }).indexOf(id);
     }
 
     return dataFactory;

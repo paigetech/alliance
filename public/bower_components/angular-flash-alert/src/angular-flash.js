@@ -1,7 +1,3 @@
-/*! angular-flash - v2.2.0 - 2016-02-06
- * https://github.com/sachinchoolur/angular-flash
- * Copyright (c) 2016 Sachin; Licensed MIT */
-
 const app = angular.module('ngFlash', []);
 
 app.run([
@@ -48,7 +44,7 @@ app.directive('flashMessage', [
                 showClose: '=',
                 onDismiss: '&'
             },
-            template: '<div ng-show="$root.flashes.length > 0"><div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div></div>',
+            template: '<div role="alert" ng-repeat="flash in $root.flashes track by $index" id="{{flash.config.id}}" class="alert {{flash.config.class}} alert-{{flash.type}} alert-dismissible alertIn alertOut"><div type="button" class="close" ng-show="flash.showClose" close-flash="{{flash.id}}"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></div> <span dynamic="flash.text"></span> </div>',
             link: function(scope, ele, attrs) {
                 Flash.setDefaultTimeout(scope.duration);
                 Flash.setShowClose(scope.showClose);
@@ -101,9 +97,9 @@ app.factory('Flash', [
             }
             $rootScope.flashes.push(flash);
             if (flash.timeout) {
-                flash.timeoutObj = $timeout(function(id) {
-                    $this.dismiss(id);
-                }, flash.timeout, true, flash.id);
+                flash.timeoutObj = $timeout(function() {
+                    $this.dismiss(flash.id);
+                }, flash.timeout);
             }
             return flash.id;
         };
@@ -118,7 +114,6 @@ app.factory('Flash', [
                 const flash = $rootScope.flashes[index];
                 dataFactory.pause(index);
                 $rootScope.flashes.splice(index, 1);
-                $rootScope.$digest();
                 if (typeof dataFactory.onDismiss === 'function') {
                     dataFactory.onDismiss(flash);
                 }
@@ -131,9 +126,7 @@ app.factory('Flash', [
         };
         dataFactory.reset = dataFactory.clear;
         function findIndexById(id) {
-            return $rootScope.flashes.findIndex((flash) => {
-                return flash.id === id;
-            });
+            return $rootScope.flashes.map((flash) => flash.id).indexOf(id);
         }
 
         return dataFactory;
