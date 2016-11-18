@@ -6,6 +6,9 @@ ehthumbs.db
 Desktop.ini
 node_modules/
 
+# Folder mongo database
+data/
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
