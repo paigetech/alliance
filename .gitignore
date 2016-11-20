@@ -1,6 +1,3 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
 
 # Folder config file
 Desktop.ini
@@ -8,6 +5,9 @@ node_modules/
 
 # Folder mongo database
 data/*
+.turtle
+.wt
+.interim
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
@@ -24,6 +24,10 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
 
 # OSX
 # =========================
