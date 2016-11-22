@@ -36,7 +36,7 @@ app.controller('SignupController', ['$scope', '$http', '$window', function($scop
     .success(function (data, status) {
       console.log('Successful signup.');
       // if successfull, redirect to /
-      $window.location.href = '/';
+      $window.location.href = '/profile';
     })
     .error(function (data) {
       console.log('Error: ' + data);

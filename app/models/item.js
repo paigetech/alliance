@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var itemSchema = mongoose.Schema({
   user : String,
   character : String,
+  //TODO: MIID needs to be unique by character
   MIID : String,
   repID : String,
   itemType : String,

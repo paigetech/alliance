@@ -13,7 +13,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function($scope
     password : '',
     admin: false,
     notes: ''
-  }
+  };
 
   // at login button click
   $scope.login = function(account) {
@@ -22,9 +22,7 @@ app.controller('LoginController', ['$scope', '$http', '$window', function($scope
     // user obj we are sending to the server
     var user = {
       email : account.email,
-      password : account.password,
-      admin : account.admin,
-      notes : account.notes
+      password : account.password
     };
     console.log(user);
 
