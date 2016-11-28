@@ -168,7 +168,7 @@ module.exports = function(app, passport) {
   });
 
   // check if the user is logged in an retrieve a different user obj based on the status
-  app.get('/loggedin', function(req, res) {
+  app.get('/api/profile', function(req, res) {
     var user = {};
     if (req.isAuthenticated()) {
       user.isLoggedIn = true;
