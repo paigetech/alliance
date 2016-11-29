@@ -19,7 +19,8 @@
     "angular-flash-alert": "~2.2.1",
     "angular-resource": "^1.5.0",
     "angular-route": "~1.5.0",
-    "underscore": "~1.8.3"
+    "underscore": "~1.8.3",
+    "ngstorage": "^0.3.11"
   },
   "resolutions": {
     "angular": "1.5.0"

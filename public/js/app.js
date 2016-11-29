@@ -1,9 +1,9 @@
 // angular routing
-var app = angular.module('alliance', ['ngRoute', 'ngResource']);
+var app = angular.module('alliance', ['ngRoute', 'ngResource', 'ngStorage']);
 
 // User global object to check loggedin status anywhere in the app
 app.service('User', function () {
-    return {};
+  return {};
 });
 
 // route provider to redirect the user to the requested view, using a single page application setup
@@ -23,7 +23,8 @@ app.config(function ($routeProvider, $locationProvider) {
   })
   .when('/thing', {
     controller: 'ThingController',
-    templateUrl: 'js/thing/views/thing.html'
+    templateUrl: 'js/thing/views/thing.html',
+    requiresAuthentication: true
   })
   .when('/things', {
     controller: 'ThingController',
@@ -43,7 +44,9 @@ app.config(function ($routeProvider, $locationProvider) {
   })
   .when('/character', {
     controller: 'CharacterController',
-    templateUrl: 'js/character/views/character.html'
+    templateUrl: 'js/character/views/character.html',
+    requiresAuthentication: true,
+    permissions: ["administration"]
   })
   .when('/character/:id', {
     controller: 'CharacterController',
@@ -87,11 +90,109 @@ app.config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-app.run( function ($rootScope, $location, $route, User) {
+app.run( function ($rootScope, $location, $route, Auth, $resource) {
+  Auth.init();
 
   $rootScope.$on('$routeChangeStart', function(event, next, current) {
-    console.log("User loggedin: " + User.isLoggedIn);
-    console.log("User status: " + JSON.stringify(User));
+    if(!Auth.checkPermissionForView(next)){
+      event.preventDefault();
+      //should have some sort of flash message 
+      //that they need to log in
+      $location.path('/login');
+    }
   });
 });
 
+app.factory('Auth', ['$resource', '$rootScope', '$sessionStorage', '$q',
+  function($resource, $rootScope, $sessionStorage, $q){
+
+    var Profile = $resource('/api/profile', {}, {
+      getUser: {
+        method: "GET"
+      }
+    });
+
+    var auth = {};
+
+    auth.init = function(){
+      if(auth.isLoggedIn()){
+        $rootScope.user = auth.currentUser();
+        console.log('already logged in', $rootScope.user);
+      } else {
+        auth.getUser();
+      }
+    };
+
+    auth.getUser = function(username, password){
+      return $q(function(resolve, reject){
+
+          Profile.getUser()
+          .$promise.then(function(user) {
+              $sessionStorage.user = user;
+              $rootScope.user = $sessionStorage.user;
+              console.log('loggin in', $rootScope.user);
+              resolve();
+          }, function() {
+              reject();
+          });
+      });
+    };
+
+    auth.logout = function() {
+      delete $sessionStorage.user;
+      delete $rootScope.user;
+    };
+
+    auth.checkPermissionForView = function(view) {
+       if (!view.requiresAuthentication) {
+           return true;
+       }
+
+       return userHasPermissionForView(view);
+    };
+
+
+    var userHasPermissionForView = function(view){
+       if(!auth.isLoggedIn()){
+           return false;
+       }
+
+       if(!view.permissions || !view.permissions.length){
+           return true;
+       }
+
+       return auth.userHasPermission(view.permissions);
+    };
+
+
+    auth.userHasPermission = function(permissions){
+       if(!auth.isLoggedIn()){
+           return false;
+       }
+
+       var found = false;
+       angular.forEach(permissions, function(permission, index){
+           if ($sessionStorage.user.user_permissions.indexOf(permission) >= 0){
+               found = true;
+               return;
+           }
+       });
+
+       return found;
+    };
+
+    auth.currentUser = function(){
+      if(auth.isLoggedIn()) {
+        return $sessionStorage.user;
+      } else {
+        return '';
+      }
+    };
+
+    auth.isLoggedIn = function(){
+      return $sessionStorage.user ? $sessionStorage.user.isLoggedIn : false;
+    };
+
+    return auth;
+
+}]);
