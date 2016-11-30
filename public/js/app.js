@@ -36,7 +36,9 @@ app.config(function ($routeProvider, $locationProvider) {
   })
   .when('/craft', {
     controller: 'CraftController',
-    templateUrl: 'js/craft/views/craft.html'
+    templateUrl: 'js/craft/views/craft.html',
+    requiresAuthentication: true,
+    permissions: ["admin"]
   })
   .when('/crafts', {
     controller: 'CraftController',
@@ -171,12 +173,12 @@ app.factory('Auth', ['$resource', '$rootScope', '$sessionStorage', '$q',
        }
 
        var found = false;
-       angular.forEach(permissions, function(permission, index){
+       maybe(permissions.forEach(function(permission, index){
            if ($sessionStorage.user.user_permissions.indexOf(permission) >= 0){
                found = true;
                return;
            }
-       });
+       }));
 
        return found;
     };

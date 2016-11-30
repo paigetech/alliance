@@ -175,6 +175,7 @@ module.exports = function(app, passport) {
       user.email = req.user.local.email;
       user.admin = req.user.local.admin;
       user.notes = req.user.local.notes;
+      user.permissions = req.user.local.permissions;
     } else {
       user.isLoggedIn = false;
       user.email = undefined;

@@ -10,6 +10,7 @@ var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
+        permissions  : Array,
         notes        : {
           type: String,
           default: "no notes"
